@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Iara Games</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="cadastro-page-wrapper">
+        <section class="cadastro-image-section">
+            <div class="cadastro-image-card">
+                <div class="cadastro-image-content">
+                    <img src="assets/brand/iara_games-logo-horizontal-green.svg" alt="Iara Games" class="cadastro-image-title">
+                </div>
+            </div>
+        </section>
+
+        <section class="cadastro-form-section">
+            <a href="index.html" class="cadastro-back-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+            </a>
+
+            <div class="cadastro-form-container">
+                <div class="cadastro-form-header">
+                    <h2>Crie sua conta</h2>
+                    <p>Junte-se à maior comunidade de jogadores do Brasil</p>
+                </div>
+                
+                <form class="cadastro-form">
+                    <div class="cadastro-form-field">
+                        <label for="name" class="cadastro-form-label">Nome completo</label>
+                        <input type="text" id="name" name="name" class="cadastro-form-input" required placeholder="Digite seu nome completo">
+                    </div>
+
+                    <div class="cadastro-form-field">
+                        <label for="email" class="cadastro-form-label">E-mail</label>
+                        <input type="email" id="email" name="email" class="cadastro-form-input" required placeholder="Digite seu e-mail">
+                    </div>
+
+                    <div class="cadastro-form-field">
+                        <label for="password" class="cadastro-form-label">Senha</label>
+                        <div class="cadastro-password-field">
+                            <input type="password" id="password" name="password" class="cadastro-form-input" required placeholder="Digite sua senha">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" onclick="togglePassword('password')">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="cadastro-form-field">
+                        <label for="confirm-password" class="cadastro-form-label">Confirmar senha</label>
+                        <div class="cadastro-password-field">
+                            <input type="password" id="confirm-password" name="confirm-password" class="cadastro-form-input" required placeholder="Digite sua senha novamente">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" onclick="togglePassword('confirm-password')">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="cadastro-form-field">
+                        <label for="birthdate" class="cadastro-form-label">Data de nascimento</label>
+                        <input type="date" id="birthdate" name="birthdate" class="cadastro-form-input" required placeholder="dd/mm/yyyy">
+                    </div>
+
+                    <div class="cadastro-form-field">
+                        <label class="cadastro-form-checkbox">
+                            <input type="checkbox" name="terms" required>
+                            <span>Eu concordo com os <a href="termos.html">Termos de Uso</a> e <a href="privacidade.html">Política de Privacidade</a></span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="cadastro-btn-primary">
+                        <span>Criar conta</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </form>
+
+                <div class="cadastro-form-footer" style="margin-top: 2rem; text-align: center;">
+                    <p>Já tem uma conta? <a href="login.html">Faça login</a></p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script>
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const button = input.nextElementSibling;
+            const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+            input.setAttribute('type', type);
+            
+            // Alterna o ícone
+            if (type === 'password') {
+                button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>`;
+            } else {
+                button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                </svg>`;
+            }
+        }
+    </script>
+</body>
+</html> 

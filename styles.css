@@ -2674,3 +2674,40 @@ button:active {
     padding-right: 3rem !important;
 }
 
+/* Estilos para navegação por teclado */
+.nav-link-wrap:focus,
+.nav-utility-link:focus,
+.nav-brand a:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+.nav-link-wrap:focus-visible,
+.nav-utility-link:focus-visible,
+.nav-brand a:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Remover outline padrão do navegador */
+.nav-link-wrap:focus:not(:focus-visible),
+.nav-utility-link:focus:not(:focus-visible),
+.nav-brand a:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Melhorar contraste do focus */
+.nav-link-wrap:focus .nav-icon,
+.nav-utility-link:focus svg {
+    color: var(--color-primary);
+}
+
+/* Adicionar transição suave */
+.nav-link-wrap,
+.nav-utility-link,
+.nav-brand a {
+    transition: outline 0.2s ease-in-out;
+}
+

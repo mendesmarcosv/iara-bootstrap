@@ -1,0 +1,93 @@
+RECURSOS DE ACESSIBILIDADE IMPLEMENTADOS NO FORMULÁRIO DE CADASTRO
+
+1. ESTRUTURA SEMÂNTICA HTML
+- Uso de tags semânticas apropriadas como <section>, <form>, <label>, <input>
+- Hierarquia clara de cabeçalhos com <h2> para o título principal
+- Estrutura lógica e organizada do conteúdo
+- Uso de <div> com classes semânticas para agrupamento de elementos relacionados
+- Atributo role="main" no container principal
+
+2. ATRIBUTOS ARIA
+- aria-label em elementos interativos (botões, links, seções)
+- aria-labelledby para associar labels com seus campos
+- aria-describedby para mensagens de erro e descrições adicionais
+- aria-required para indicar campos obrigatórios
+- aria-pressed para botões de toggle (mostrar/ocultar senha)
+- aria-hidden="true" para elementos decorativos
+- role="alert" para mensagens de erro
+- aria-live regions para feedback dinâmico
+
+3. ATRIBUTOS DE FORMULÁRIO
+- Atributo 'required' em campos obrigatórios
+- Atributo 'type' apropriado para cada campo (text, email, password, date)
+- Atributo 'novalidate' no formulário para controle personalizado de validação
+- Atributo 'placeholder' com instruções claras para cada campo
+- Atributo 'id' único para cada campo, permitindo associação com labels
+
+4. LABELS E ASSOCIAÇÕES
+- Labels explícitos para todos os campos usando a tag <label>
+- Labels associados corretamente aos campos usando atributo 'for'
+- Textos descritivos e claros nos labels
+- Labels posicionados acima dos campos para melhor compreensão
+- IDs únicos para cada label permitindo associação ARIA
+
+5. VALIDAÇÃO E FEEDBACK
+- Validação do Bootstrap com classe 'needs-validation'
+- Feedback visual através da classe 'was-validated'
+- Mensagens de erro personalizadas em português
+- Validação em tempo real dos campos obrigatórios
+- Mensagens de erro acessíveis via aria-describedby
+- Feedback visual e auditivo para estados de erro
+
+6. NAVEGAÇÃO POR TECLADO
+- Campos de formulário naturalmente focáveis
+- Ordem lógica de tabulação entre os campos
+- Botões interativos acessíveis via teclado
+- Links de navegação (Termos de Uso, Política de Privacidade) acessíveis
+- Estados de foco visíveis e consistentes
+
+7. CONTRASTE E VISIBILIDADE
+- Uso de cores com contraste adequado (texto branco sobre fundo escuro)
+- Tamanho de fonte legível
+- Espaçamento adequado entre elementos
+- Ícones com significado semântico (Bootstrap Icons e Phosphor Icons)
+- Estados visuais claros para interações
+
+8. RESPONSIVIDADE
+- Layout responsivo usando Bootstrap Grid
+- Adaptação para diferentes tamanhos de tela
+- Campos de formulário com largura adequada
+- Espaçamento responsivo entre elementos
+- Mantém acessibilidade em diferentes viewports
+
+9. ATRIBUTOS DE IDIOMA
+- Definição do idioma da página com 'lang="pt-BR"'
+- Conteúdo em português do Brasil
+- Mensagens e instruções em português
+- Mensagens de erro em português
+
+10. RECURSOS DE USABILIDADE
+- Campos de senha com opção de visualização
+- Mensagens de ajuda através de placeholders
+- Agrupamento lógico de campos relacionados
+- Botão de submit com ícone indicativo de ação
+- Descrições ocultas para leitores de tela (visually-hidden)
+
+11. CONSIDERAÇÕES DE UX
+- Feedback visual para interações (hover, focus, active)
+- Estados visuais claros para campos obrigatórios
+- Mensagens de erro contextuais
+- Fluxo de navegação intuitivo
+- Feedback imediato para ações do usuário
+
+12. RECOMENDAÇÕES DE MELHORIAS FUTURAS
+- Implementar skip links para navegação por teclado
+- Adicionar suporte a navegação por atalhos de teclado
+- Implementar validação de força de senha
+- Adicionar suporte a aria-live regions para atualizações dinâmicas
+- Implementar autocomplete onde apropriado
+- Adicionar suporte a navegação por landmarks
+- Implementar mensagens de sucesso após submissão
+- Adicionar suporte a navegação por headings
+- Implementar suporte a navegação por listas
+- Adicionar suporte a navegação por tabelas (se aplicável) 

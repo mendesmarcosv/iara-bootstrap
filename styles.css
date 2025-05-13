@@ -58,6 +58,10 @@ body {
     overflow-x: hidden;
 }
 
+p {
+    margin-bottom: 0px;
+}
+
 a {
     text-decoration: none;
     color: inherit;
@@ -596,10 +600,7 @@ section {
   color: var(--color-text-dark);
 }
 
-.btn-primary:hover {
-  background-color: var(--color-hover);
-  border-color: var(--color-hover);
-}
+
 
 .btn-yellow {
   background-color: var(--color-yellow);
@@ -855,15 +856,6 @@ header {
     text-wrap: balance;
 }
 
-.hero-content .btn-primary {
-    background-color: var(--color-primary);
-    color: var(--color-text-dark);
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
 .hero-content .btn-primary:hover {
     background-color: var(--color-hover);
     transform: translateY(-2px);
@@ -932,6 +924,16 @@ header {
 
 /* Call to Action Component */
 
+.seller-img {
+
+    position: absolute;
+    width: 359px;
+    height: 93px;
+    bottom: 40px;
+    border-radius: 0;
+    right: 0px;
+}
+
 .call-to-action__container {
     
     display: flex;
@@ -965,11 +967,10 @@ header {
 
             &:first-child {
                 display: flex;
-                flex-direction: column;
                 align-self: center;
 
                 align-items: flex-start;
-                padding: 1rem 4rem;
+
 
                 > h2 {
                     font-size: 3rem;
@@ -1049,6 +1050,9 @@ header {
 
 /* Jogo em Promoção component */
 
+.game-promotion-image {
+    border-radius: 0 24px 24px 0;
+}
 .game-promotion__container {
     display: flex;
     flex-direction: colunm;
@@ -1118,41 +1122,14 @@ header {
             object-fit: cover;
         }
 
-        .seller-img {
-
-            position: absolute;
-            width: 359px;
-            height: 93px;
-            bottom: 40px;
-            border-radius: 0;
-            right: 0px;
-        }
+        
     }
 
     > div {
 
-        position: relative;
-        background: rgba(35, 35, 35, .37);
-        padding: 56px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
 
-        border-radius: 24px 0 0 24px;
 
-        &::before {
 
-            content: "";
-            position: absolute;
-            inset: 0; 
-            border-radius: 24px 0 0 24px; 
-            padding: 1px; 
-            background: linear-gradient(to right, var(--color-primary), #090C01);
-            -webkit-mask: linear-gradient(var(--color-white) 0 0) content-box, linear-gradient(var(--color-white) 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none; 
-        }
         
         > p {
 
@@ -1919,12 +1896,7 @@ header {
 }
 
 /* Estilos específicos da página de jogos */
-.games-list-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
 
-}
 
 .game-card {
     background: #1E1E1E;
@@ -2189,21 +2161,21 @@ header {
 
 /* Botões */
 .button-primary {
-    font-size: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1.25rem 2rem;
-    min-height: 48px;
-    gap: 1rem;
-    text-transform: uppercase;
-    background: var(--color-primary);
-    color: var(--color-text-dark);
-    font-weight: 800;
-    border-radius: 500px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    font-size: 1rem !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 1.25rem 2rem !important;
+    min-height: 48px !important;
+    gap: 1rem !important;
+    text-transform: uppercase !important;
+    background: var(--color-primary) !important;
+    color: var(--color-black) !important;
+    font-weight: 800 !important;
+    border-radius: 500px !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
 }
 
 .button-primary:hover {
@@ -2463,13 +2435,14 @@ button:active {
 }
 
 .cadastro-form-input:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 2px rgba(204, 254, 44, 0.2);
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: var(--color-primary) !important;
+    box-shadow: 0 0 0 2px rgba(204, 254, 44, 0.2) !important;
+    color: var(--color-white) !important;
 }
 
 .cadastro-form-input::placeholder {
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.3) !important;
 }
 
 /* Estiliza o placeholder do input de data */
@@ -2628,5 +2601,76 @@ button:active {
   .section-header-jogos {
     padding-top: 1.5rem;
   }
+}
+
+.game-promotion-infos {
+    position: relative;
+    background: rgba(35, 35, 35, .37);
+    padding: 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 24px 0 0 24px;
+}
+
+.game-promotion-infos::before {
+    content: "";
+    position: absolute;
+    inset: 0; 
+    border-radius: 24px 0 0 24px; 
+    padding: 1px; 
+    background: linear-gradient(to right, var(--color-primary), #090C01);
+    -webkit-mask: linear-gradient(var(--color-white) 0 0) content-box, linear-gradient(var(--color-white) 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none; 
+}
+
+.game-promotion-infos > p {
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+.game-promotion-infos > div > p {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #767676;
+    margin-bottom: 16px;
+}
+
+.game-promotion-infos > div > div > div .tag-console {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-right: 10px;
+    background-color: var(--color-black);
+}
+
+.password-toggle-btn i.ph {
+    color: var(--color-white) !important;
+    opacity: 0.5;
+    font-size: 1.25rem;
+    transition: color 0.2s, opacity 0.2s;
+}
+.password-toggle-btn:hover i.ph {
+    opacity: 1;
+    color: var(--color-primary) !important;
+}
+
+.password-toggle-btn {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 10px;
+}
+
+.cadastro-password-field .cadastro-form-input {
+    padding-right: 3rem !important;
 }
 

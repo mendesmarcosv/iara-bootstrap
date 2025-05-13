@@ -4,110 +4,137 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro - Iara Games</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <div class="cadastro-page-wrapper">
-        <section class="cadastro-image-section">
-            <div class="cadastro-image-card">
-                <div class="cadastro-image-content">
-                    <img src="assets/brand/iara_games-logo-horizontal-green.svg" alt="Iara Games" class="cadastro-image-title">
-                </div>
-            </div>
-        </section>
-
-        <section class="cadastro-form-section">
-            <a href="index.html" class="cadastro-back-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                </svg>
-            </a>
-
-            <div class="cadastro-form-container">
-                <div class="cadastro-form-header">
-                    <h2>Crie sua conta</h2>
-                    <p>Junte-se à maior comunidade de jogadores do Brasil</p>
-                </div>
-                
-                <form class="cadastro-form">
-                    <div class="cadastro-form-field">
-                        <label for="name" class="cadastro-form-label">Nome completo</label>
-                        <input type="text" id="name" name="name" class="cadastro-form-input" required placeholder="Digite seu nome completo">
+    <div class="container-fluid">
+        <div class="row min-vh-100">
+            <section class="col-md-6 cadastro-image-section d-flex align-items-center justify-content-center p-4">
+                <div class="cadastro-image-card">
+                    <div class="cadastro-image-content">
+                        <img src="assets/brand/iara_games-logo-horizontal-green.svg" alt="Iara Games" class="cadastro-image-title">
                     </div>
-
-                    <div class="cadastro-form-field">
-                        <label for="email" class="cadastro-form-label">E-mail</label>
-                        <input type="email" id="email" name="email" class="cadastro-form-input" required placeholder="Digite seu e-mail">
+                </div>
+            </section>
+            <section class="col-md-6 cadastro-form-section d-flex align-items-center justify-content-center">
+                <a href="index.html" class="cadastro-back-button">
+                    <i class="bi bi-x-lg"></i>
+                </a>
+                <div class="cadastro-form-container">
+                    <div class="cadastro-form-header mb-4">
+                        <h2 class="fw-bold text-white mb-2">Crie sua conta</h2>
+                        <p class="text-light mb-4">Junte-se à maior comunidade de jogadores do Brasil</p>
                     </div>
-
-                    <div class="cadastro-form-field">
-                        <label for="password" class="cadastro-form-label">Senha</label>
-                        <div class="cadastro-password-field">
-                            <input type="password" id="password" name="password" class="cadastro-form-input" required placeholder="Digite sua senha">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" onclick="togglePassword('password')">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                            </svg>
+                    
+                    <form class="cadastro-form needs-validation" novalidate>
+                        <div class="cadastro-form-field mb-3">
+                            <label for="name" class="cadastro-form-label">Nome completo</label>
+                            <input type="text" class="form-control cadastro-form-input" id="name" required placeholder="Digite seu nome completo">
                         </div>
-                    </div>
 
-                    <div class="cadastro-form-field">
-                        <label for="confirm-password" class="cadastro-form-label">Confirmar senha</label>
-                        <div class="cadastro-password-field">
-                            <input type="password" id="confirm-password" name="confirm-password" class="cadastro-form-input" required placeholder="Digite sua senha novamente">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" onclick="togglePassword('confirm-password')">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                            </svg>
+                        <div class="cadastro-form-field mb-3">
+                            <label for="email" class="cadastro-form-label">E-mail</label>
+                            <input type="email" class="form-control cadastro-form-input" id="email" required placeholder="Digite seu e-mail">
                         </div>
+
+                        <div class="cadastro-form-field mb-3">
+                            <label for="password" class="cadastro-form-label">Senha</label>
+                            <div class="cadastro-password-field">
+                                <input type="password" class="form-control cadastro-form-input" id="password" required placeholder="Digite sua senha">
+                                <button type="button" class="password-toggle-btn position-absolute end-0 top-50 translate-middle-y me-2" onclick="togglePassword('password', this)">
+                                    <i class="ph ph-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="cadastro-form-field mb-3">
+                            <label for="confirm-password" class="cadastro-form-label">Confirmar senha</label>
+                            <div class="cadastro-password-field">
+                                <input type="password" class="form-control cadastro-form-input" id="confirm-password" required placeholder="Digite sua senha novamente">
+                                <button type="button" class="password-toggle-btn position-absolute end-0 top-50 translate-middle-y me-2" onclick="togglePassword('confirm-password', this)">
+                                    <i class="ph ph-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="cadastro-form-field mb-3">
+                            <label for="birthdate" class="cadastro-form-label">Data de nascimento</label>
+                            <input type="date" class="form-control cadastro-form-input" id="birthdate" required>
+                        </div>
+
+                        <div class="cadastro-form-field mb-3">
+                            <label class="cadastro-form-checkbox position-relative" style="padding-left: 32px; cursor: pointer;">
+                                <input type="checkbox" id="terms" name="terms" required style="opacity:0;position:absolute;left:0;top:0;width:24px;height:24px;cursor:pointer;z-index:2;">
+                                <span class="custom-checkbox-ph" style="position:absolute;left:0;top:0;width:24px;height:24px;border:2px solid var(--color-primary);border-radius:4px;background:transparent;display:flex;align-items:center;justify-content:center;transition:background 0.2s;"></span>
+                                <span style="margin-left:8px;">Eu concordo com os <a href="termos.html">Termos de Uso</a> e <a href="privacidade.html">Política de Privacidade</a></span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="button-primary w-100 d-flex align-items-center justify-content-center gap-2 mt-4">
+                            <span>Criar conta</span>
+                            <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </form>
+
+                    <div class="cadastro-form-footer mt-4">
+                        <p>Já tem uma conta? <a href="login.html">Faça login</a></p>
                     </div>
-
-                    <div class="cadastro-form-field">
-                        <label for="birthdate" class="cadastro-form-label">Data de nascimento</label>
-                        <input type="date" id="birthdate" name="birthdate" class="cadastro-form-input" required placeholder="dd/mm/yyyy">
-                    </div>
-
-                    <div class="cadastro-form-field">
-                        <label class="cadastro-form-checkbox">
-                            <input type="checkbox" name="terms" required>
-                            <span>Eu concordo com os <a href="termos.html">Termos de Uso</a> e <a href="privacidade.html">Política de Privacidade</a></span>
-                        </label>
-                    </div>
-
-                    <button type="submit" class="cadastro-btn-primary">
-                        <span>Criar conta</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </button>
-                </form>
-
-                <div class="cadastro-form-footer" style="margin-top: 2rem; text-align: center;">
-                    <p>Já tem uma conta? <a href="login.html">Faça login</a></p>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
     </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function togglePassword(inputId) {
+        function togglePassword(inputId, btn) {
             const input = document.getElementById(inputId);
-            const button = input.nextElementSibling;
+            const icon = btn.querySelector('i');
             const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
             input.setAttribute('type', type);
-            
-            // Alterna o ícone
-            if (type === 'password') {
-                button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>`;
-            } else {
-                button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-                </svg>`;
-            }
+            icon.classList.toggle('ph-eye');
+            icon.classList.toggle('ph-eye-slash');
         }
+
+        // Validação do formulário Bootstrap
+        (function () {
+            'use strict'
+            var forms = document.querySelectorAll('.needs-validation')
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+
+        // Checkbox customizado com Phosphor
+        const termsInput = document.getElementById('terms');
+        const customCheckbox = termsInput.parentElement.querySelector('.custom-checkbox-ph');
+        const checkIcon = document.createElement('i');
+        checkIcon.className = 'ph ph-check';
+        checkIcon.style.display = 'none';
+        checkIcon.style.color = '#000';
+        checkIcon.style.fontSize = '18px';
+        customCheckbox.appendChild(checkIcon);
+        termsInput.addEventListener('change', function() {
+            if (this.checked) {
+                customCheckbox.style.background = 'var(--color-primary)';
+                checkIcon.style.display = 'block';
+            } else {
+                customCheckbox.style.background = 'transparent';
+                checkIcon.style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html> 

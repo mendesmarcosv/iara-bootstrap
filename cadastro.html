@@ -1,243 +1,361 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cadastro - Iara Games</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <div class="container-fluid" role="main">
-        <div class="row min-vh-100">
-            <section class="col-md-6 cadastro-image-section d-flex align-items-center justify-content-center p-4" aria-label="Seção de imagem da marca">
-                <div class="cadastro-image-card">
-                    <div class="cadastro-image-content">
-                        <img src="assets/brand/iara_games-logo-horizontal-green.svg" alt="Logo Iara Games" class="cadastro-image-title" aria-label="Logo Iara Games">
-                    </div>
+      <div class="row min-vh-100">
+        <section
+          class="col-md-6 cadastro-image-section d-flex align-items-center justify-content-center p-4"
+          aria-label="Seção de imagem da marca"
+        >
+          <div class="cadastro-image-card">
+            <div class="cadastro-image-content">
+              <img
+                src="assets/brand/iara_games-logo-horizontal-green.svg"
+                alt="Logo Iara Games"
+                class="cadastro-image-title"
+                aria-label="Logo Iara Games"
+              />
+            </div>
+          </div>
+        </section>
+        <section
+          class="col-md-6 cadastro-form-section d-flex align-items-center justify-content-center"
+          aria-label="Seção de formulário de cadastro"
+        >
+          <a
+            href="index.html"
+            class="cadastro-back-button"
+            aria-label="Fechar formulário e voltar à página inicial"
+          >
+            <i class="bi bi-x-lg" aria-hidden="true"></i>
+          </a>
+          <div class="cadastro-form-container">
+            <div class="cadastro-form-header mb-4">
+              <h2 class="fw-bold text-white mb-2" id="form-title">
+                Crie sua conta
+              </h2>
+              <p class="text-light mb-4">
+                Junte-se à maior comunidade de jogadores do Brasil
+              </p>
+            </div>
+
+            <form
+              class="cadastro-form needs-validation"
+              novalidate
+              aria-labelledby="form-title"
+            >
+              <div class="cadastro-form-field mb-3">
+                <label for="name" class="cadastro-form-label" id="name-label"
+                  >Nome completo</label
+                >
+                <input
+                  type="text"
+                  class="form-control cadastro-form-input"
+                  id="name"
+                  required
+                  placeholder="Digite seu nome completo"
+                  aria-required="true"
+                  aria-labelledby="name-label"
+                  aria-describedby="name-error"
+                />
+                <div
+                  id="name-error"
+                  class="invalid-feedback"
+                  role="alert"
+                ></div>
+              </div>
+
+              <div class="cadastro-form-field mb-3">
+                <label for="email" class="cadastro-form-label" id="email-label"
+                  >E-mail</label
+                >
+                <input
+                  type="email"
+                  class="form-control cadastro-form-input"
+                  id="email"
+                  required
+                  placeholder="Digite seu e-mail"
+                  aria-required="true"
+                  aria-labelledby="email-label"
+                  aria-describedby="email-error"
+                />
+                <div
+                  id="email-error"
+                  class="invalid-feedback"
+                  role="alert"
+                ></div>
+              </div>
+
+              <div class="cadastro-form-field mb-3">
+                <label
+                  for="password"
+                  class="cadastro-form-label"
+                  id="password-label"
+                  >Senha</label
+                >
+                <div class="cadastro-password-field">
+                  <input
+                    type="password"
+                    class="form-control cadastro-form-input"
+                    id="password"
+                    required
+                    placeholder="Digite sua senha"
+                    aria-required="true"
+                    aria-labelledby="password-label"
+                    aria-describedby="password-error password-toggle-desc"
+                  />
+                  <button
+                    type="button"
+                    class="password-toggle-btn position-absolute end-1 top-50 translate-middle-y me-2"
+                    onclick="togglePassword('password', this)"
+                    aria-label="Mostrar senha"
+                    aria-pressed="false"
+                    aria-describedby="password-toggle-desc"
+                  >
+                    <i class="ph ph-eye" aria-hidden="true"></i>
+                  </button>
+                  <span id="password-toggle-desc" class="visually-hidden"
+                    >Clique para mostrar ou ocultar a senha</span
+                  >
                 </div>
-            </section>
-            <section class="col-md-6 cadastro-form-section d-flex align-items-center justify-content-center" aria-label="Seção de formulário de cadastro">
-                <a href="index.html" class="cadastro-back-button" aria-label="Fechar formulário e voltar à página inicial">
-                    <i class="bi bi-x-lg" aria-hidden="true"></i>
-                </a>
-                <div class="cadastro-form-container">
-                    <div class="cadastro-form-header mb-4">
-                        <h2 class="fw-bold text-white mb-2" id="form-title">Crie sua conta</h2>
-                        <p class="text-light mb-4">Junte-se à maior comunidade de jogadores do Brasil</p>
-                    </div>
-                    
-                    <form class="cadastro-form needs-validation" novalidate aria-labelledby="form-title">
-                        <div class="cadastro-form-field mb-3">
-                            <label for="name" class="cadastro-form-label" id="name-label">Nome completo</label>
-                            <input type="text" class="form-control cadastro-form-input" id="name" required 
-                                   placeholder="Digite seu nome completo" 
-                                   aria-required="true"
-                                   aria-labelledby="name-label"
-                                   aria-describedby="name-error">
-                            <div id="name-error" class="invalid-feedback" role="alert"></div>
-                        </div>
+                <div
+                  id="password-error"
+                  class="invalid-feedback"
+                  role="alert"
+                ></div>
+              </div>
 
-                        <div class="cadastro-form-field mb-3">
-                            <label for="email" class="cadastro-form-label" id="email-label">E-mail</label>
-                            <input type="email" class="form-control cadastro-form-input" id="email" required 
-                                   placeholder="Digite seu e-mail" 
-                                   aria-required="true"
-                                   aria-labelledby="email-label"
-                                   aria-describedby="email-error">
-                            <div id="email-error" class="invalid-feedback" role="alert"></div>
-                        </div>
-
-                        <div class="cadastro-form-field mb-3">
-                            <label for="password" class="cadastro-form-label" id="password-label">Senha</label>
-                            <div class="cadastro-password-field">
-                                <input type="password" class="form-control cadastro-form-input" id="password" required 
-                                       placeholder="Digite sua senha" 
-                                       aria-required="true"
-                                       aria-labelledby="password-label"
-                                       aria-describedby="password-error password-toggle-desc">
-                                <button type="button" class="password-toggle-btn position-absolute end-0 top-50 translate-middle-y me-2" 
-                                        onclick="togglePassword('password', this)"
-                                        aria-label="Mostrar senha"
-                                        aria-pressed="false"
-                                        aria-describedby="password-toggle-desc">
-                                    <i class="ph ph-eye" aria-hidden="true"></i>
-                                </button>
-                                <span id="password-toggle-desc" class="visually-hidden">Clique para mostrar ou ocultar a senha</span>
-                            </div>
-                            <div id="password-error" class="invalid-feedback" role="alert"></div>
-                        </div>
-
-                        <div class="cadastro-form-field mb-3">
-                            <label for="confirm-password" class="cadastro-form-label" id="confirm-password-label">Confirmar senha</label>
-                            <div class="cadastro-password-field">
-                                <input type="password" class="form-control cadastro-form-input" id="confirm-password" required 
-                                       placeholder="Digite sua senha novamente" 
-                                       aria-required="true"
-                                       aria-labelledby="confirm-password-label"
-                                       aria-describedby="confirm-password-error confirm-password-toggle-desc">
-                                <button type="button" class="password-toggle-btn position-absolute end-0 top-50 translate-middle-y me-2" 
-                                        onclick="togglePassword('confirm-password', this)"
-                                        aria-label="Mostrar senha de confirmação"
-                                        aria-pressed="false"
-                                        aria-describedby="confirm-password-toggle-desc">
-                                    <i class="ph ph-eye" aria-hidden="true"></i>
-                                </button>
-                                <span id="confirm-password-toggle-desc" class="visually-hidden">Clique para mostrar ou ocultar a senha de confirmação</span>
-                            </div>
-                            <div id="confirm-password-error" class="invalid-feedback" role="alert"></div>
-                        </div>
-
-                        <div class="cadastro-form-field mb-3">
-                            <label for="birthdate" class="cadastro-form-label" id="birthdate-label">Data de nascimento</label>
-                            <input type="date" class="form-control cadastro-form-input" id="birthdate" required 
-                                   aria-required="true"
-                                   aria-labelledby="birthdate-label"
-                                   aria-describedby="birthdate-error">
-                            <div id="birthdate-error" class="invalid-feedback" role="alert"></div>
-                        </div>
-
-                        <div class="cadastro-form-field mb-3">
-                            <label class="cadastro-form-checkbox position-relative" style="padding-left: 32px; cursor: pointer;" id="terms-label">
-                                <input type="checkbox" id="terms" name="terms" required 
-                                       style="opacity:0;position:absolute;left:0;top:0;width:24px;height:24px;cursor:pointer;z-index:2;"
-                                       aria-required="true"
-                                       aria-labelledby="terms-label"
-                                       aria-describedby="terms-error">
-                                <span class="custom-checkbox-ph" style="position:absolute;left:0;top:0;width:24px;height:24px;border:2px solid var(--color-primary);border-radius:4px;background:transparent;display:flex;align-items:center;justify-content:center;transition:background 0.2s;" aria-hidden="true"></span>
-                                <span style="margin-left:8px;">Eu concordo com os <a href="termos.html" aria-label="Ler os Termos de Uso">Termos de Uso</a> e <a href="privacidade.html" aria-label="Ler a Política de Privacidade">Política de Privacidade</a></span>
-                            </label>
-                            <div id="terms-error" class="invalid-feedback" role="alert"></div>
-                        </div>
-
-                        <button type="submit" class="button-primary w-100 d-flex align-items-center justify-content-center gap-2 mt-4" 
-                                aria-label="Criar conta">
-                            <span>Criar conta</span>
-                            <i class="bi bi-arrow-right" aria-hidden="true"></i>
-                        </button>
-                    </form>
-
-                    <div class="cadastro-form-footer mt-4">
-                        <p>Já tem uma conta? <a href="login.html" aria-label="Ir para página de login">Faça login</a></p>
-                    </div>
+              <div class="cadastro-form-field mb-3">
+                <label
+                  for="confirm-password"
+                  class="cadastro-form-label"
+                  id="confirm-password-label"
+                  >Confirmar senha</label
+                >
+                <div class="cadastro-password-field">
+                  <input
+                    type="password"
+                    class="form-control cadastro-form-input"
+                    id="confirm-password"
+                    required
+                    placeholder="Digite sua senha novamente"
+                    aria-required="true"
+                    aria-labelledby="confirm-password-label"
+                    aria-describedby="confirm-password-error confirm-password-toggle-desc"
+                  />
+                  <button
+                    type="button"
+                    class="password-toggle-btn position-absolute end-1 top-50 translate-middle-y me-2"
+                    onclick="togglePassword('confirm-password', this)"
+                    aria-label="Mostrar senha de confirmação"
+                    aria-pressed="false"
+                    aria-describedby="confirm-password-toggle-desc"
+                  >
+                    <i class="ph ph-eye" aria-hidden="true"></i>
+                  </button>
+                  <span
+                    id="confirm-password-toggle-desc"
+                    class="visually-hidden"
+                    >Clique para mostrar ou ocultar a senha de confirmação</span
+                  >
                 </div>
-            </section>
-        </div>
+                <div
+                  id="confirm-password-error"
+                  class="invalid-feedback"
+                  role="alert"
+                ></div>
+              </div>
+
+              <div class="cadastro-form-field mb-3">
+                <label
+                  for="birthdate"
+                  class="cadastro-form-label"
+                  id="birthdate-label"
+                  >Data de nascimento</label
+                >
+                <input
+                  type="date"
+                  class="form-control cadastro-form-input"
+                  id="birthdate"
+                  required
+                  aria-required="true"
+                  aria-labelledby="birthdate-label"
+                  aria-describedby="birthdate-error"
+                />
+                <div
+                  id="birthdate-error"
+                  class="invalid-feedback"
+                  role="alert"
+                ></div>
+              </div>
+
+              <div class="cadastro-form-field mb-3">
+                <label
+                  class="cadastro-form-checkbox position-relative"
+                  style="padding-left: 32px; cursor: pointer"
+                  id="terms-label"
+                >
+                  <input
+                    type="checkbox"
+                    id="terms"
+                    name="terms"
+                    required
+                    style="
+                      opacity: 0;
+                      position: absolute;
+                      left: 0;
+                      top: 0;
+                      width: 24px;
+                      height: 24px;
+                      cursor: pointer;
+                      z-index: 2;
+                    "
+                    aria-required="true"
+                    aria-labelledby="terms-label"
+                    aria-describedby="terms-error"
+                  />
+                  <span
+                    class="custom-checkbox-ph"
+                    style="
+                      position: absolute;
+                      left: 0;
+                      top: 0;
+                      width: 24px;
+                      height: 24px;
+                      border: 2px solid var(--color-primary);
+                      border-radius: 4px;
+                      background: transparent;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      transition: background 0.2s;
+                    "
+                    aria-hidden="true"
+                  ></span>
+                  <span style="margin-left: 8px"
+                    >Eu concordo com os
+                    <a href="termos.html" aria-label="Ler os Termos de Uso"
+                      >Termos de Uso</a
+                    >
+                    e
+                    <a
+                      href="privacidade.html"
+                      aria-label="Ler a Política de Privacidade"
+                      >Política de Privacidade</a
+                    ></span
+                  >
+                </label>
+                <div
+                  id="terms-error"
+                  class="invalid-feedback"
+                  role="alert"
+                ></div>
+              </div>
+
+              <button
+                type="submit"
+                class="button-primary w-100 d-flex align-items-center justify-content-center gap-2 mt-4"
+                aria-label="Criar conta"
+              >
+                <span>Criar conta</span>
+                <i class="bi bi-arrow-right" aria-hidden="true"></i>
+              </button>
+            </form>
+
+            <div class="cadastro-form-footer mt-4">
+              <p>
+                Já tem uma conta?
+                <a href="login.html" aria-label="Ir para página de login"
+                  >Faça login</a
+                >
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
 
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./js/validação-cadastro.js"></script>
     <script>
-        function togglePassword(inputId, btn) {
-            const input = document.getElementById(inputId);
-            const icon = btn.querySelector('i');
-            const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
-            input.setAttribute('type', type);
-            icon.classList.toggle('ph-eye');
-            icon.classList.toggle('ph-eye-slash');
-            
-            // Atualizar atributos ARIA
-            const isPasswordVisible = type === 'text';
-            btn.setAttribute('aria-pressed', isPasswordVisible);
-            btn.setAttribute('aria-label', isPasswordVisible ? 'Ocultar senha' : 'Mostrar senha');
+      function togglePassword(inputId, btn) {
+        const input = document.getElementById(inputId);
+        const icon = btn.querySelector("i");
+        const type =
+          input.getAttribute("type") === "password" ? "text" : "password";
+        input.setAttribute("type", type);
+        icon.classList.toggle("ph-eye");
+        icon.classList.toggle("ph-eye-slash");
+
+        // Atualizar atributos ARIA
+        const isPasswordVisible = type === "text";
+        btn.setAttribute("aria-pressed", isPasswordVisible);
+        btn.setAttribute(
+          "aria-label",
+          isPasswordVisible ? "Ocultar senha" : "Mostrar senha"
+        );
+      }
+
+      // Validação do formulário Bootstrap
+      (function () {
+        "use strict";
+        var forms = document.querySelectorAll(".needs-validation");
+        Array.prototype.slice.call(forms).forEach(function (form) {
+          form.addEventListener(
+            "submit",
+            function (event) {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add("was-validated");
+            },
+            false
+          );
+        });
+      })();
+
+      // Checkbox customizado com Phosphor
+      const termsInput = document.getElementById("terms");
+      const customCheckbox = termsInput.parentElement.querySelector(
+        ".custom-checkbox-ph"
+      );
+      const checkIcon = document.createElement("i");
+      checkIcon.className = "ph ph-check";
+      checkIcon.style.display = "none";
+      checkIcon.style.color = "#000";
+      checkIcon.style.fontSize = "18px";
+      customCheckbox.appendChild(checkIcon);
+      termsInput.addEventListener("change", function () {
+        if (this.checked) {
+          customCheckbox.style.background = "var(--color-primary)";
+          checkIcon.style.display = "block";
+        } else {
+          customCheckbox.style.background = "transparent";
+          checkIcon.style.display = "none";
         }
+      });
 
-        // Validação do formulário Bootstrap
-        (function () {
-            'use strict'
-            var forms = document.querySelectorAll('.needs-validation')
-            Array.prototype.slice.call(forms).forEach(function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-                    form.classList.add('was-validated')
-                }, false)
-            })
-        })()
-
-        // Checkbox customizado com Phosphor
-        const termsInput = document.getElementById('terms');
-        const customCheckbox = termsInput.parentElement.querySelector('.custom-checkbox-ph');
-        const checkIcon = document.createElement('i');
-        checkIcon.className = 'ph ph-check';
-        checkIcon.style.display = 'none';
-        checkIcon.style.color = '#000';
-        checkIcon.style.fontSize = '18px';
-        customCheckbox.appendChild(checkIcon);
-        termsInput.addEventListener('change', function() {
-            if (this.checked) {
-                customCheckbox.style.background = 'var(--color-primary)';
-                checkIcon.style.display = 'block';
-            } else {
-                customCheckbox.style.background = 'transparent';
-                checkIcon.style.display = 'none';
-            }
-        });
-
-        // Adicionar validação personalizada com mensagens em português
-        document.querySelector('.cadastro-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const form = this;
-            let isValid = true;
-            
-            // Validar nome
-            const nameInput = document.getElementById('name');
-            if (!nameInput.value.trim()) {
-                document.getElementById('name-error').textContent = 'Por favor, digite seu nome completo';
-                isValid = false;
-            }
-            
-            // Validar email
-            const emailInput = document.getElementById('email');
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(emailInput.value)) {
-                document.getElementById('email-error').textContent = 'Por favor, digite um e-mail válido';
-                isValid = false;
-            }
-            
-            // Validar senha
-            const passwordInput = document.getElementById('password');
-            if (passwordInput.value.length < 8) {
-                document.getElementById('password-error').textContent = 'A senha deve ter pelo menos 8 caracteres';
-                isValid = false;
-            }
-            
-            // Validar confirmação de senha
-            const confirmPasswordInput = document.getElementById('confirm-password');
-            if (confirmPasswordInput.value !== passwordInput.value) {
-                document.getElementById('confirm-password-error').textContent = 'As senhas não coincidem';
-                isValid = false;
-            }
-            
-            // Validar data de nascimento
-            const birthdateInput = document.getElementById('birthdate');
-            if (!birthdateInput.value) {
-                document.getElementById('birthdate-error').textContent = 'Por favor, selecione sua data de nascimento';
-                isValid = false;
-            }
-            
-            // Validar termos
-            const termsInput = document.getElementById('terms');
-            if (!termsInput.checked) {
-                document.getElementById('terms-error').textContent = 'Você precisa concordar com os termos para continuar';
-                isValid = false;
-            }
-            
-            if (isValid) {
-                // Aqui você pode adicionar a lógica de submissão do formulário
-                console.log('Formulário válido, enviando...');
-            }
-            
-            form.classList.add('was-validated');
-        });
+      // Adicionar validação personalizada com mensagens em português
     </script>
-</body>
-</html> 
+  </body>
+</html>

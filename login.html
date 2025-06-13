@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Iara Games</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <div class="cadastro-page-wrapper">
+        <section
+          class="cadastro-image-section"
+          aria-label="Seção de imagem da marca"
+        >
+          <div class="cadastro-image-card">
+            <div class="cadastro-image-content">
+              <img
+                src="assets/brand/iara_games-logo-horizontal-green.svg"
+                alt="Logo Iara Games"
+                class="cadastro-image-title"
+                aria-label="Logo Iara Games"
+              />
+            </div>
+          </div>
+        </section>
+
+        <!-- Form Section -->
+        <section
+          class="cadastro-form-section"
+          aria-label="Seção de formulário de login"
+        >
+          <a
+            href="index.html"
+            class="cadastro-back-button"
+            aria-label="Fechar formulário e voltar à página inicial"
+          >
+            <i class="bi bi-x-lg" aria-hidden="true"></i>
+          </a>
+
+          <div class="cadastro-form-container">
+            <div class="cadastro-form-header">
+              <h2 class="fw-bold text-white mb-2" id="form-title">
+                Acesse sua conta
+              </h2>
+              <p class="text-light mb-4">
+                Entre para acessar a maior comunidade de jogadores do Brasil
+              </p>
+            </div>
+
+            <form
+              class="cadastro-form needs-validation"
+              novalidate
+              aria-labelledby="form-title"
+              id="loginForm"
+            >
+              <div class="cadastro-form-field mb-3">
+                <label for="email" class="cadastro-form-label" id="email-label">
+                  E-mail
+                </label>
+                <input
+                  type="email"
+                  class="form-control cadastro-form-input"
+                  id="email"
+                  required
+                  placeholder="Digite seu e-mail"
+                  aria-required="true"
+                  aria-labelledby="email-label"
+                  aria-describedby="email-error"
+                />
+                <div
+                  id="email-error"
+                  class="invalid-feedback"
+                  role="alert"
+                ></div>
+              </div>
+
+              <div class="cadastro-form-field mb-3">
+                <label
+                  for="password"
+                  class="cadastro-form-label"
+                  id="password-label password"
+                >
+                  Senha
+                </label>
+                <div class="cadastro-password-field">
+                  <input
+                    type="password"
+                    class="form-control cadastro-form-input"
+                    id="password"
+                    required
+                    placeholder="Digite sua senha"
+                    aria-required="true"
+                    aria-labelledby="password-label"
+                    aria-describedby="password-error password-toggle-desc"
+                  />
+                  <button
+                    type="button"
+                    class="password-toggle-btn position-absolute end-1 top-50 translate-middle-y me-2"
+                    onclick="togglePassword('password', this)"
+                    aria-label="Mostrar senha"
+                    aria-pressed="false"
+                    aria-describedby="password-toggle-desc"
+                  >
+                    <i class="ph ph-eye" aria-hidden="true"></i>
+                  </button>
+                  <span id="password-toggle-desc" class="visually-hidden">
+                    Clique para mostrar ou ocultar a senha
+                  </span>
+                </div>
+                <div
+                  id="password-error"
+                  class="invalid-feedback"
+                  role="alert"
+                ></div>
+              </div>
+
+              <div
+                class="cadastro-form-field d-flex justify-content-between align-items-center"
+              >
+                <label class="cadastro-form-checkbox" style="margin-bottom: 0">
+                  <input
+                    type="checkbox"
+                    id="rememberMe"
+                    name="rememberMe"
+                    style="
+                      opacity: 0;
+                      position: absolute;
+                      left: 0;
+                      top: 0;
+                      width: 24px;
+                      height: 24px;
+                      cursor: pointer;
+                      z-index: 2;
+                    "
+                  />
+                  <span
+                    class="custom-checkbox-ph"
+                    style="
+                      position: absolute;
+                      left: 0;
+                      top: 0;
+                      width: 24px;
+                      height: 24px;
+                      border: 2px solid var(--color-primary);
+                      border-radius: 4px;
+                      background: transparent;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      transition: background 0.2s;
+                    "
+                    aria-hidden="true"
+                  ></span>
+                  <span
+                    style="
+                      margin-left: 32px;
+                      color: var(--color-white);
+                      margin-top: 3.5px;
+                    "
+                  >
+                    Lembrar de mim
+                  </span>
+                </label>
+
+                <a
+                  href="recuperar-senha.html"
+                  style="
+                    color: var(--color-primary);
+                    text-decoration: underline;
+                    font-size: 0.875rem;
+                  "
+                  aria-label="Recuperar senha esquecida"
+                >
+                  Esqueceu a senha?
+                </a>
+              </div>
+
+              <!-- Error Message -->
+              <div id="errorMessage" style="display: none">
+                <div
+                  class="alert alert-danger"
+                  role="alert"
+                  style="
+                    background-color: rgba(220, 53, 69, 0.1);
+                    border: 1px solid rgba(220, 53, 69, 0.3);
+                    color: #ff6b6b;
+                    border-radius: 8px;
+                    padding: 1rem;
+                    margin-top: 1rem;
+                  "
+                >
+                  <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                  <span id="errorText"
+                    >Usuário não encontrado. Verifique suas credenciais e tente
+                    novamente.</span
+                  >
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                class="button-primary w-100 d-flex align-items-center justify-content-center gap-2 mt-4"
+                aria-label="Entrar na conta"
+                id="loginBtn"
+              >
+                <span class="login-text">Entrar</span>
+                <span class="loading-spinner d-none">
+                  <i
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></i>
+                  Verificando...
+                </span>
+                <i class="bi bi-arrow-right" aria-hidden="true"></i>
+              </button>
+            </form>
+
+            <div class="cadastro-form-footer mt-4">
+              <p>
+                Não tem uma conta?
+                <a href="cadastro.html" aria-label="Ir para página de cadastro">
+                  Cadastre-se
+                </a>
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      function togglePassword(inputId, btn) {
+        const input = document.getElementById(inputId);
+        const icon = btn.querySelector("i");
+        const type =
+          input.getAttribute("type") === "password" ? "text" : "password";
+        input.setAttribute("type", type);
+        icon.classList.toggle("ph-eye");
+        icon.classList.toggle("ph-eye-slash");
+
+        // Atualizar atributos ARIA
+        const isPasswordVisible = type === "text";
+        btn.setAttribute("aria-pressed", isPasswordVisible);
+        btn.setAttribute(
+          "aria-label",
+          isPasswordVisible ? "Ocultar senha" : "Mostrar senha"
+        );
+      }
+
+      // Validação do formulário Bootstrap
+      (function () {
+        "use strict";
+        var forms = document.querySelectorAll(".needs-validation");
+        Array.prototype.slice.call(forms).forEach(function (form) {
+          form.addEventListener(
+            "submit",
+            function (event) {
+              event.preventDefault();
+              event.stopPropagation();
+
+              if (form.checkValidity()) {
+                simulateLogin();
+              }
+
+              form.classList.add("was-validated");
+            },
+            false
+          );
+        });
+      })();
+
+      const rememberMeInput = document.getElementById("rememberMe");
+      const customCheckbox = rememberMeInput.parentElement.querySelector(
+        ".custom-checkbox-ph"
+      );
+      const checkIcon = document.createElement("i");
+      checkIcon.className = "ph ph-check";
+      checkIcon.style.display = "none";
+      checkIcon.style.color = "#000";
+      checkIcon.style.fontSize = "18px";
+      customCheckbox.appendChild(checkIcon);
+
+      rememberMeInput.addEventListener("change", function () {
+        if (this.checked) {
+          customCheckbox.style.background = "var(--color-primary)";
+          checkIcon.style.display = "block";
+        } else {
+          customCheckbox.style.background = "transparent";
+          checkIcon.style.display = "none";
+        }
+      });
+    </script>
+
+    <script src="./js/find-user-login.js"></script>
+    <script src="./js/validação-cadastro.js"></script>
+  </body>
+</html>

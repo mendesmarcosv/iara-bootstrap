@@ -15,6 +15,13 @@
     />
     <link rel="stylesheet" href="styles.css" />
     <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <style>
+      .hero-cards-row .col-12 {
+        perspective: 1000px;
+      }
+    </style>
   </head>
   <body>
     <div class="page-wrapper" role="document">
@@ -120,6 +127,7 @@
                     class="nav-utility-link"
                     role="button"
                     aria-label="Carrinho de compras"
+                    style="position: relative;"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -133,6 +141,7 @@
                         d="M241.55,64.74A12,12,0,0,0,232,60H60.23L51.56,28.79A12,12,0,0,0,40,20H20a12,12,0,0,0,0,24H30.88l34.3,123.49a28.09,28.09,0,0,0,27,20.51H191a28.09,28.09,0,0,0,27-20.51l25.63-92.28A12,12,0,0,0,241.55,64.74ZM194.8,161.07A4,4,0,0,1,191,164H92.16a4,4,0,0,1-3.85-2.93L66.9,84H216.21ZM108,220a20,20,0,1,1-20-20A20,20,0,0,1,108,220Zm104,0a20,20,0,1,1-20-20A20,20,0,0,1,212,220Z"
                       ></path>
                     </svg>
+                    <span id="nav-cart-counter" class="cart-counter"></span>
                   </a>
                 </div>
                 <div
@@ -173,26 +182,39 @@
         </div>
       </nav>
       <header class="hero-section" role="banner">
+        <video autoplay muted loop playsinline id="hero-video-bg">
+          <source src="assets/iara-video-bg.mp4" type="video/mp4">
+          Seu navegador não suporta o elemento de vídeo.
+        </video>
         <div class="padding-global">
           <div class="container">
             <div class="hero-content text-center pb-5">
-              <img
-                src="assets/brand/iara_games-typo.svg"
-                alt="Logotipo da Iara Games"
-                class="hero-brand-typo mb-4"
-              />
-              <h1 class="display-5 mb-3 fw-bold text-uppercase">
-                sua melhor escolha
-              </h1>
-              <p class="mb-4">
-                A ÚNICA empresa do mercado com títulos nacionais e
-                internacionais em um preço acessível para todos!
-              </p>
+              <div class="hero-main-text">
+                <img
+                  src="assets/brand/iara_games-typo.svg"
+                  alt="Logotipo da Iara Games"
+                  class="hero-brand-typo mb-4"
+                  data-aos="fade-down"
+                />
+                <h1
+                  class="display-5 mb-3 fw-bold text-uppercase"
+                  data-aos="fade-up"
+                  data-aos-delay="100"
+                >
+                  sua melhor escolha
+                </h1>
+                <p class="mb-4" data-aos="fade-up" data-aos-delay="200">
+                  A ÚNICA empresa do mercado com títulos nacionais e
+                  internacionais em um preço acessível para todos!
+                </p>
+              </div>
               <a
                 href="cadastro.html"
                 class="btn btn-primary button-primary"
                 role="button"
                 aria-label="Criar conta na Iara Games"
+                data-aos="fade-up"
+                data-aos-delay="300"
               >
                 Criar conta
                 <img src="./assets/line.png" alt="" aria-hidden="true" />
@@ -201,6 +223,8 @@
                 class="hero-cards-row row justify-content-center"
                 role="complementary"
                 aria-label="Jogos em destaque"
+                data-aos="fade-up"
+                data-aos-delay="400"
               >
                 <div class="col-12">
                   <div
@@ -245,6 +269,16 @@
             </div>
           </div>
         </div>
+        <div class="video-controls">
+          <button id="video-play-pause" class="video-control-btn" aria-label="Pausar vídeo">
+            <i id="play-icon" class="ph ph-play" style="display: none;"></i>
+            <i id="pause-icon" class="ph ph-pause"></i>
+          </button>
+          <button id="video-mute-unmute" class="video-control-btn" aria-label="Ativar som do vídeo">
+            <i id="mute-icon" class="ph ph-speaker-simple-slash"></i>
+            <i id="unmute-icon" class="ph ph-speaker-high" style="display: none;"></i>
+          </button>
+        </div>
       </header>
 
       <main id="main-content" role="main">
@@ -257,6 +291,7 @@
                 >
                   <div
                     class="col-lg-5 text-center text-md-start mb-4 mb-md-0 d-flex flex-column align-items-start px-4"
+                    data-aos="fade-in"
                   >
                     <h2 id="cta-title" class="mb-3 text-primary">
                       Descubra seu próximo jogo favorito
@@ -270,6 +305,8 @@
                       class="btn btn-primary button-primary"
                       role="button"
                       aria-label="Experimentar agora a Iara Games"
+                      data-aos="fade-in"
+                      data-aos-delay="100"
                     >
                       Experimentar agora
                       <img src="./assets/line.png" alt="" aria-hidden="true" />
@@ -280,6 +317,8 @@
                     class="image__container col-lg-6 px-0"
                     role="complementary"
                     aria-label="Imagens promocionais"
+                    data-aos="fade-in"
+                    data-aos-delay="200"
                   >
                     <figure class="mb-0">
                       <img
@@ -332,14 +371,18 @@
           class="game-promotion__container"
           aria-labelledby="promo-title"
         >
-          <div class="padding-global">
+          <div class="padding-global game-promotion-padding">
             <div class="container">
-              <div class="game-promotion__content">
+              <div class="game-promotion__content" data-aos="fade-up">
                 <h2 id="promo-title" class="display-6 mb-4 fw-bold">
                   Jogo do mês em promoção
                 </h2>
                 <div class="row align-items-center align-items-stretch">
-                  <div class="col-lg-6 mb-4 mb-lg-0 game-promotion-infos">
+                  <div
+                    class="col-lg-6 mb-4 mb-lg-0 game-promotion-infos"
+                    data-aos="fade-right"
+                    data-aos-delay="200"
+                  >
                     <h3 class="heading-3 promo-banner-heading mb-3">
                       Assassins Creed Origins
                     </h3>
@@ -421,6 +464,7 @@
                           name="option"
                           class="custom-radio"
                           aria-label="Opção de compra por R$ 69,98"
+                          id="buy-option"
                         />
 
                         <div class="d-flex justify-content-between">
@@ -444,6 +488,7 @@
                           name="option"
                           class="custom-radio"
                           aria-label="Opção gratuita via IG Play"
+                          id="ig-play-option"
                         />
 
                         <div class="d-flex justify-content-between">
@@ -462,16 +507,26 @@
                     </div>
 
                     <a
-                      href="cadastro.html"
+                      href="#"
                       class="btn btn-primary button-primary"
                       role="button"
                       aria-label="Adicionar Assassins Creed Origins ao carrinho"
+                      data-aos="fade-up"
+                      data-aos-delay="100"
+                      id="add-to-cart-btn"
                     >
                       ADICIONAR AGORA
                       <img src="./assets/line.png" alt="" aria-hidden="true" />
                     </a>
+                    <div id="promo-error-message" class="promo-error-message" style="display: none;">
+                      Por favor, selecione uma opção de compra.
+                    </div>
                   </div>
-                  <div class="col-lg-6 position-relative px-0">
+                  <div
+                    class="col-lg-6 position-relative px-0"
+                    data-aos="fade-left"
+                    data-aos-delay="200"
+                  >
                     <figure class="mb-0 position-relative h-100">
                       <img
                         class="w-100 h-100 object-fit-cover game-promotion-image"
@@ -496,7 +551,11 @@
           <div class="padding-global">
             <div class="container">
               <div class="indies-lancamentos">
-                <h2 id="indies-title" class="section-title-gradient mb-8">
+                <h2
+                  id="indies-title"
+                  class="section-title-gradient mb-8"
+                  data-aos="fade-up"
+                >
                   Jogos Indie
                   <span class="highlight-indies">em lançamento</span>
                 </h2>
@@ -505,7 +564,11 @@
                   role="list"
                   aria-label="Lista de jogos indie"
                 >
-                  <div class="col-sm-6 col-md-4 col-lg-4" role="listitem">
+                  <div
+                    class="col-sm-6 col-md-4 col-lg-4"
+                    role="listitem"
+                    data-aos="fade-up"
+                  >
                     <div
                       class="game-card"
                       data-categoria="indie"
@@ -535,16 +598,24 @@
                           </p>
                           <a
                             href="#"
-                            class="buy-button"
+                            class="buy-button add-to-cart-indie-btn"
                             role="button"
                             aria-label="Comprar jogo Gurb's Adventure"
-                            >Comprar jogo</a
+                            data-game-id="gurbs-adventure"
+                            data-game-name="Gurb's Adventure"
+                            data-game-price="55.00"
+                            >Adicionar ao carrinho</a
                           >
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6 col-md-4 col-lg-4" role="listitem">
+                  <div
+                    class="col-sm-6 col-md-4 col-lg-4"
+                    role="listitem"
+                    data-aos="fade-up"
+                    data-aos-delay="100"
+                  >
                     <div
                       class="game-card"
                       data-categoria="indie"
@@ -576,16 +647,24 @@
                           </p>
                           <a
                             href="#"
-                            class="buy-button"
+                            class="buy-button add-to-cart-indie-btn"
                             role="button"
                             aria-label="Comprar jogo Pacific Drive"
-                            >Comprar jogo</a
+                            data-game-id="pacific-drive"
+                            data-game-name="Pacific Drive"
+                            data-game-price="68.50"
+                            >Adicionar ao carrinho</a
                           >
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6 col-md-4 col-lg-4" role="listitem">
+                  <div
+                    class="col-sm-6 col-md-4 col-lg-4"
+                    role="listitem"
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                  >
                     <div
                       class="game-card"
                       data-categoria="indie"
@@ -617,16 +696,23 @@
                           </p>
                           <a
                             href="#"
-                            class="buy-button"
+                            class="buy-button add-to-cart-indie-btn"
                             role="button"
                             aria-label="Comprar jogo Below"
-                            >Comprar jogo</a
+                            data-game-id="below"
+                            data-game-name="Below"
+                            data-game-price="96.00"
+                            >Adicionar ao carrinho</a
                           >
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6 col-md-4 col-lg-4" role="listitem">
+                  <div
+                    class="col-sm-6 col-md-4 col-lg-4"
+                    role="listitem"
+                    data-aos="fade-up"
+                  >
                     <div
                       class="game-card"
                       data-categoria="indie"
@@ -658,16 +744,24 @@
                           </p>
                           <a
                             href="#"
-                            class="buy-button"
+                            class="buy-button add-to-cart-indie-btn"
                             role="button"
                             aria-label="Comprar jogo EKKO And The FireFly"
-                            >Comprar jogo</a
+                            data-game-id="ekko-firefly"
+                            data-game-name="EKKO And The FireFly"
+                            data-game-price="80.90"
+                            >Adicionar ao carrinho</a
                           >
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6 col-md-4 col-lg-4" role="listitem">
+                  <div
+                    class="col-sm-6 col-md-4 col-lg-4"
+                    role="listitem"
+                    data-aos="fade-up"
+                    data-aos-delay="100"
+                  >
                     <div
                       class="game-card"
                       data-categoria="indie"
@@ -699,16 +793,24 @@
                           </p>
                           <a
                             href="#"
-                            class="buy-button"
+                            class="buy-button add-to-cart-indie-btn"
                             role="button"
                             aria-label="Comprar jogo Alto's Adventure"
-                            >Comprar jogo</a
+                            data-game-id="altos-adventure"
+                            data-game-name="Alto's Adventure"
+                            data-game-price="70.00"
+                            >Adicionar ao carrinho</a
                           >
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6 col-md-4 col-lg-4" role="listitem">
+                  <div
+                    class="col-sm-6 col-md-4 col-lg-4"
+                    role="listitem"
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                  >
                     <div
                       class="game-card"
                       data-categoria="indie"
@@ -738,16 +840,23 @@
                           </p>
                           <a
                             href="#"
-                            class="buy-button"
+                            class="buy-button add-to-cart-indie-btn"
                             role="button"
                             aria-label="Comprar jogo Hard-Boiled"
-                            >Comprar jogo</a
+                            data-game-id="hard-boiled"
+                            data-game-name="Hard-Boiled"
+                            data-game-price="97.00"
+                            >Adicionar ao carrinho</a
                           >
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6 col-md-4 col-lg-4" role="listitem">
+                  <div
+                    class="col-sm-6 col-md-4 col-lg-4"
+                    role="listitem"
+                    data-aos="fade-up"
+                  >
                     <div
                       class="game-card"
                       data-categoria="indie"
@@ -779,16 +888,24 @@
                           </p>
                           <a
                             href="#"
-                            class="buy-button"
+                            class="buy-button add-to-cart-indie-btn"
                             role="button"
                             aria-label="Comprar jogo Paleoarctic"
-                            >Comprar jogo</a
+                            data-game-id="paleoarctic"
+                            data-game-name="Paleoarctic"
+                            data-game-price="300.00"
+                            >Adicionar ao carrinho</a
                           >
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6 col-md-4 col-lg-4" role="listitem">
+                  <div
+                    class="col-sm-6 col-md-4 col-lg-4"
+                    role="listitem"
+                    data-aos="fade-up"
+                    data-aos-delay="100"
+                  >
                     <div
                       class="game-card"
                       data-categoria="indie"
@@ -818,16 +935,24 @@
                           </p>
                           <a
                             href="#"
-                            class="buy-button"
+                            class="buy-button add-to-cart-indie-btn"
                             role="button"
                             aria-label="Comprar jogo Paul Skenes I"
-                            >Comprar jogo</a
+                            data-game-id="paul-skenes-1"
+                            data-game-name="Paul Skenes I"
+                            data-game-price="380.00"
+                            >Adicionar ao carrinho</a
                           >
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6 col-md-4 col-lg-4" role="listitem">
+                  <div
+                    class="col-sm-6 col-md-4 col-lg-4"
+                    role="listitem"
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                  >
                     <div
                       class="game-card"
                       data-categoria="indie"
@@ -857,16 +982,23 @@
                           </p>
                           <a
                             href="#"
-                            class="buy-button"
+                            class="buy-button add-to-cart-indie-btn"
                             role="button"
                             aria-label="Comprar jogo Hotline Miami"
-                            >Comprar jogo</a
+                            data-game-id="hotline-miami"
+                            data-game-name="Hotline Miami"
+                            data-game-price="135.80"
+                            >Adicionar ao carrinho</a
                           >
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6 col-md-4 col-lg-4" role="listitem">
+                  <div
+                    class="col-sm-6 col-md-4 col-lg-4"
+                    role="listitem"
+                    data-aos="fade-up"
+                  >
                     <div
                       class="game-card"
                       data-categoria="indie"
@@ -896,16 +1028,23 @@
                           </p>
                           <a
                             href="#"
-                            class="buy-button"
+                            class="buy-button add-to-cart-indie-btn"
                             role="button"
                             aria-label="Comprar jogo Nim"
-                            >Comprar jogo</a
+                            data-game-id="nim"
+                            data-game-name="Nim"
+                            data-game-price="68.90"
+                            >Adicionar ao carrinho</a
                           >
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6 col-md-4 col-lg-4" role="listitem">
+                  <div
+                    class="col-sm-6 col-md-4 col-lg-4"
+                    role="listitem"
+                    data-aos="fade-up"
+                  >
                     <div
                       class="game-card"
                       data-categoria="indie"
@@ -937,16 +1076,23 @@
                           </p>
                           <a
                             href="#"
-                            class="buy-button"
+                            class="buy-button add-to-cart-indie-btn"
                             role="button"
                             aria-label="Comprar jogo Ori"
-                            >Comprar jogo</a
+                            data-game-id="ori"
+                            data-game-name="Ori"
+                            data-game-price="90.00"
+                            >Adicionar ao carrinho</a
                           >
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6 col-md-4 col-lg-4" role="listitem">
+                  <div
+                    class="col-sm-6 col-md-4 col-lg-4"
+                    role="listitem"
+                    data-aos="fade-up"
+                  >
                     <div
                       class="game-card"
                       data-categoria="indie"
@@ -976,16 +1122,23 @@
                           </p>
                           <a
                             href="#"
-                            class="buy-button"
+                            class="buy-button add-to-cart-indie-btn"
                             role="button"
                             aria-label="Comprar jogo The Rambling"
-                            >Comprar jogo</a
+                            data-game-id="the-rambling"
+                            data-game-name="The Rambling"
+                            data-game-price="90.00"
+                            >Adicionar ao carrinho</a
                           >
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6 col-md-4 col-lg-4" role="listitem">
+                  <div
+                    class="col-sm-6 col-md-4 col-lg-4"
+                    role="listitem"
+                    data-aos="fade-up"
+                  >
                     <div
                       class="game-card"
                       data-categoria="indie"
@@ -1015,16 +1168,23 @@
                           </p>
                           <a
                             href="#"
-                            class="buy-button"
+                            class="buy-button add-to-cart-indie-btn"
                             role="button"
                             aria-label="Comprar jogo Yaga"
-                            >Comprar jogo</a
+                            data-game-id="yaga"
+                            data-game-name="Yaga"
+                            data-game-price="90.00"
+                            >Adicionar ao carrinho</a
                           >
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6 col-md-4 col-lg-4" role="listitem">
+                  <div
+                    class="col-sm-6 col-md-4 col-lg-4"
+                    role="listitem"
+                    data-aos="fade-up"
+                  >
                     <div
                       class="game-card"
                       data-categoria="indie"
@@ -1056,16 +1216,23 @@
                           </p>
                           <a
                             href="#"
-                            class="buy-button"
+                            class="buy-button add-to-cart-indie-btn"
                             role="button"
                             aria-label="Comprar jogo The Woods"
-                            >Comprar jogo</a
+                            data-game-id="the-woods"
+                            data-game-name="The Woods"
+                            data-game-price="90.00"
+                            >Adicionar ao carrinho</a
                           >
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6 col-md-4 col-lg-4" role="listitem">
+                  <div
+                    class="col-sm-6 col-md-4 col-lg-4"
+                    role="listitem"
+                    data-aos="fade-up"
+                  >
                     <div
                       class="game-card"
                       data-categoria="indie"
@@ -1095,10 +1262,13 @@
                           </p>
                           <a
                             href="#"
-                            class="buy-button"
+                            class="buy-button add-to-cart-indie-btn"
                             role="button"
                             aria-label="Comprar jogo Pan's Lavyrinth"
-                            >Comprar jogo</a
+                            data-game-id="pans-labyrinth"
+                            data-game-name="Pan's Lavyrinth"
+                            data-game-price="90.00"
+                            >Adicionar ao carrinho</a
                           >
                         </div>
                       </div>
@@ -1111,6 +1281,8 @@
                     class="btn btn-primary button-primary"
                     role="button"
                     aria-label="Ver todos os jogos disponíveis"
+                    data-aos="fade-up"
+                    data-aos-delay="100"
                   >
                     <div class="nav-icon" aria-hidden="true">
                       <svg
@@ -1179,7 +1351,7 @@
                   ©2025 IARA GAMES™ // Todos direitos reservados
                 </p>
                 <p class="text-size-sm mb-0 text-muted small">
-                  Website by Grupo 38 - FIAP.
+                  Website by FIAP.
                 </p>
               </div>
             </div>
@@ -1187,6 +1359,24 @@
         </div>
       </footer>
     </div>
+    <!-- Botão Flutuante do Carrinho -->
+    <a href="#" id="floating-cart-btn" class="floating-cart-btn">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="32"
+        fill="currentColor"
+        viewBox="0 0 256 256"
+      >
+        <path
+          d="M241.55,64.74A12,12,0,0,0,232,60H60.23L51.56,28.79A12,12,0,0,0,40,20H20a12,12,0,0,0,0,24H30.88l34.3,123.49a28.09,28.09,0,0,0,27,20.51H191a28.09,28.09,0,0,0,27-20.51l25.63-92.28A12,12,0,0,0,241.55,64.74ZM194.8,161.07A4,4,0,0,1,191,164H92.16a4,4,0,0,1-3.85-2.93L66.9,84H216.21ZM108,220a20,20,0,1,1-20-20A20,20,0,0,1,108,220Zm104,0a20,20,0,1,1-20-20A20,20,0,0,1,212,220Z"
+        ></path>
+      </svg>
+      <span id="floating-cart-counter" class="cart-counter"></span>
+    </a>
+
+    <div id="toast-container"></div>
+
     <!-- Bootstrap JS Bundle com Popper -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
@@ -1194,5 +1384,61 @@
       crossorigin="anonymous"
     ></script>
     <script src="script.js"></script>
+    <script src="js/cart-sounds.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/video-scroll.js"></script>
+    <script src="js/parallax-effect.js"></script>
+    <script src="js/hero-music.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 800, // duração da animação
+        once: true, // whether animation should happen only once - while scrolling down
+      });
+    </script>
+    <!-- GSAP JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+      // GSAP Hero Cards Hover Animation
+      document.addEventListener("DOMContentLoaded", () => {
+        const heroSection = document.querySelector(".hero-section");
+        // The container of all three cards
+        const cardsContainer = document.querySelector(".hero-cards");
+
+        if (heroSection && cardsContainer) {
+          heroSection.addEventListener("mousemove", (e) => {
+            const x =
+              (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+            const y =
+              (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+
+            // Adjust these multipliers for desired effect
+            const moveMultiplier = 15;
+            const rotateMultiplier = 5;
+
+            gsap.to(cardsContainer, {
+              x: x * moveMultiplier,
+              y: y * moveMultiplier,
+              rotationY: x * rotateMultiplier, // Rotates on Y-axis for a 3D effect
+              rotationX: -y * rotateMultiplier, // Rotates on X-axis
+              duration: 0.8,
+              ease: "power2.out",
+            });
+          });
+
+          heroSection.addEventListener("mouseleave", () => {
+            gsap.to(cardsContainer, {
+              x: 0,
+              y: 0,
+              rotationY: 0,
+              rotationX: 0,
+              duration: 1,
+              ease: "elastic.out(1, 0.3)",
+            });
+          });
+        }
+      });
+    </script>
   </body>
 </html>

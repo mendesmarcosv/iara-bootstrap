@@ -21,6 +21,12 @@
       .hero-cards-row .col-12 {
         perspective: 1000px;
       }
+      
+      #user-dropdown-menu .dropdown-item:hover, #user-dropdown-menu .dropdown-item:focus {
+        background: rgba(182,255,122,0.10) !important;
+        color: #b6ff7a !important;
+        text-shadow: 0 0 8px #b6ff7a, 0 0 16px #b6ff7a55;
+      }
     </style>
   </head>
   <body>
@@ -148,6 +154,9 @@
                   class="nav-user-wrapper ms-3"
                   role="complementary"
                   aria-label="Informações do usuário"
+                  id="user-info-trigger"
+                  tabindex="0"
+                  style="cursor: pointer;"
                 >
                   <div class="nav-user-balance">
                     <img
@@ -167,14 +176,38 @@
                     />
                   </div>
                 </div>
-                <div class="nav-user-profile-wrapper ms-3">
+                <div class="nav-user-profile-wrapper ms-3" id="user-profile-trigger" tabindex="0" style="cursor: pointer; position: relative;">
                   <img
                     class="nav-user-profile-icon"
+                    id="user-profile-img"
                     src="assets/foto-perfil.webp"
                     alt="Foto de perfil do usuário"
                     role="img"
                     aria-label="Foto de perfil"
                   />
+                </div>
+                <div id="user-dropdown-menu" class="dropdown-menu show border-0 rounded-3 p-0" style="display: none; position: absolute; right: 0; top: 100px; min-width: 260px; background: rgba(10, 20, 20, 0.97); box-shadow: 0 0px 8px 0 rgba(182,255,122,0.25), 0 1.5px 0 0 #b6ff7a33;">
+                  <div class="dropdown-header d-flex align-items-center justify-content-between px-4 py-3" style="color: #b6ff7a; font-weight: 600; font-size: 1rem; text-shadow: 0 0 6px #b6ff7a, 0 0 6px #b6ff7a55; border-color: #b6ff7a33;">
+                    Meu perfil
+                    <img src="assets/foto-perfil.webp" alt="Foto de perfil" class="ms-2" style="width: 28px; height: 28px; border-radius: 50%; border: 2px solid #b6ff7a; background: #222;" />
+                  </div>
+                  <ul class="list-unstyled mb-0 flex-column">
+                    <li>
+                      <a href="#" class="dropdown-item d-flex align-items-center gap-2 px-4 py-3" style="color: #b6ff7a; text-shadow: 0 0 6px #b6ff7a, 0 0 12px #b6ff7a55;">
+                        Conta
+                        <svg width="16" height="16" fill="#b6ff7a" style="margin-left: 4px;" viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3z"></path><path d="M5 5h4V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-4h-2v4H5V5z"></path></svg>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" class="dropdown-item px-4 py-3" style="color: #b6ff7a; text-shadow: 0 0 6px #b6ff7a, 0 0 2px #b6ff7a55;">Minhas compras</a>
+                    </li>
+                    <li>
+                      <a href="#" class="dropdown-item px-4 py-3" style="color: #b6ff7a; text-shadow: 0 0 6px #b6ff7a, 0 0 2px #b6ff7a55;">Configurações</a>
+                    </li>
+                    <li>
+                      <a href="#" class="dropdown-item px-4 py-3" style="color: #b6ff7a; text-shadow: 0 0 6px #b6ff7a, 0 0 2px #b6ff7a55;">Sair</a>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -1440,5 +1473,6 @@
         }
       });
     </script>
+    <script src="js/menu-dropdown.js"></script>
   </body>
 </html>

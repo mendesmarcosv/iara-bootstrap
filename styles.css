@@ -1327,7 +1327,7 @@ header {
       input[type="radio"] {
         width: 20px;
         height: 20px;
-        accent-color: #232323;
+        accent-color: var(--color-primary);
         cursor: pointer;
         position: relative;
         margin-top: 6px;

@@ -73,7 +73,7 @@ export const Header: React.FC = () => {
           <div className="nav-wrapper">
             {/* Logo Esquerda */}
             <div className="nav-logo-wrapper">
-              <a href="http://localhost:8000" aria-label="Página inicial da Iara Games">
+              <a href="/" aria-label="Página inicial da Iara Games">
                 <svg
                   className="nav-brand-logo"
                   viewBox="0 0 132 132"

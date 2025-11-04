@@ -1,11 +1,17 @@
 {
-  "buildCommand": "cd app && npm run build",
-  "installCommand": "cd app && npm install --legacy-peer-deps",
-  "outputDirectory": "app/build",
-  "rewrites": [
+  "builds": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "app/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/app/$1"
     }
   ]
 }

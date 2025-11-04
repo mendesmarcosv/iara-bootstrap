@@ -1,5 +1,5 @@
 // Routes Configuration
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Header } from '../components/Layout/Header';
 import { RouteGuard } from '../components/RouteGuard';
@@ -17,17 +17,9 @@ import { Orders } from '../pages/Orders';
 import { BoletoPayment } from '../pages/Payment/BoletoPayment';
 import { PixPayment } from '../pages/Payment/PixPayment';
 
-// Redirect to Landing Page
-const RedirectToLanding: React.FC = () => {
-  useEffect(() => {
-    // Em produção, redireciona para a página principal (index.html na raiz)
-    // Em desenvolvimento, usa localhost:8000
-    const landingUrl = process.env.NODE_ENV === 'production' 
-      ? '/index.html'
-      : 'http://localhost:8000';
-    window.location.href = landingUrl;
-  }, []);
-  return <div>Redirecionando...</div>;
+// Redirect to Catalog instead of landing
+const RedirectToCatalog: React.FC = () => {
+  return <Navigate to="/catalog" replace />;
 };
 
 export const AppRoutes: React.FC = () => {
@@ -35,8 +27,8 @@ export const AppRoutes: React.FC = () => {
     <BrowserRouter>
       <Header />
       <Routes>
-        {/* Redirect Home to Landing */}
-        <Route path="/" element={<RedirectToLanding />} />
+        {/* Redirect Home to Catalog */}
+        <Route path="/" element={<RedirectToCatalog />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/catalog" element={<Catalog />} />

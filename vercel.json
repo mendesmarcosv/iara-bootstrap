@@ -2,5 +2,11 @@
   "buildCommand": "cd app && NODE_OPTIONS='--max-old-space-size=4096' npm run build",
   "devCommand": "cd app && npm start",
   "installCommand": "cd app && npm install",
-  "outputDirectory": "app/build"
+  "outputDirectory": "app/build",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }

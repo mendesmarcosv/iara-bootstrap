@@ -5,8 +5,16 @@
   "outputDirectory": "app/build",
   "routes": [
     {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
       "src": "/landing/(.*)",
       "dest": "/landing/$1"
+    },
+    {
+      "src": "/(favicon.ico|logo.*\\.png|manifest.json|robots.txt)",
+      "dest": "/$1"
     },
     {
       "src": "/",
@@ -22,10 +30,6 @@
     },
     {
       "src": "/payment/(.*)",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/(.*)",
       "dest": "/index.html"
     }
   ]

@@ -17,18 +17,12 @@ import { Orders } from '../pages/Orders';
 import { BoletoPayment } from '../pages/Payment/BoletoPayment';
 import { PixPayment } from '../pages/Payment/PixPayment';
 
-// Redirect to Catalog instead of landing
-const RedirectToCatalog: React.FC = () => {
-  return <Navigate to="/catalog" replace />;
-};
-
 export const AppRoutes: React.FC = () => {
   return (
     <BrowserRouter>
       <Header />
       <Routes>
-        {/* Redirect Home to Catalog */}
-        <Route path="/" element={<RedirectToCatalog />} />
+        {/* No root route - landing page is served separately */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/catalog" element={<Catalog />} />

@@ -1,0 +1,70 @@
+/* Design Tokens - Iara Games */
+:root {
+  /* Colors */
+  --color-bg: #0b0d12;
+  --color-surface: #141924;
+  --color-text: #e6eaf2;
+  --color-muted: #9aa3b2;
+  --color-primary: #ccfe2c;
+  --color-yellow: #fee62c;
+  --color-blue: #2c7afe;
+  --color-error: #ff2d55;
+  --color-success: #34c759;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-text-primary: #8a8a8a;
+  --color-text-dark: #333333;
+  --color-hover: #e0e0e0;
+  --color-background: #121212;
+  --color-text-light: #c1c1c1;
+
+  /* Typography */
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  
+  /* Font Sizes */
+  --fs-xs: 12px;
+  --fs-sm: 14px;
+  --fs-md: 16px;
+  --fs-lg: 18px;
+  --fs-xl: 24px;
+  --fs-2xl: 32px;
+  --fs-3xl: 48px;
+
+  /* Spacing */
+  --sp-0: 0;
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+  --sp-20: 80px;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-1: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-2: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-3: 0 8px 32px rgba(0, 0, 0, 0.4);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 350ms ease;
+
+  /* Breakpoints (for reference in JS) */
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+}
+

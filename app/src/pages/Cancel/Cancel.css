@@ -1,0 +1,122 @@
+/* Cancel Page Styles */
+.cancel-page {
+  min-height: calc(100vh - 80px);
+  padding: var(--sp-8) 0;
+  display: flex;
+  align-items: center;
+}
+
+.cancel-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-10);
+  box-shadow: var(--shadow-2);
+  text-align: center;
+}
+
+.cancel-icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto var(--sp-6);
+  background: var(--color-error);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+.cancel-title {
+  font-size: var(--fs-3xl);
+  margin-bottom: var(--sp-4);
+  color: var(--color-error);
+}
+
+.cancel-message {
+  font-size: var(--fs-lg);
+  color: var(--color-muted);
+  line-height: 1.6;
+  margin-bottom: var(--sp-8);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cancel-info {
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-6);
+  margin-bottom: var(--sp-8);
+  text-align: left;
+}
+
+.cancel-info h3 {
+  font-size: var(--fs-lg);
+  margin-bottom: var(--sp-4);
+  color: var(--color-primary);
+}
+
+.cancel-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.cancel-info li {
+  padding: var(--sp-3);
+  margin-bottom: var(--sp-2);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.cancel-info li::before {
+  content: '✓';
+  width: 24px;
+  height: 24px;
+  background: var(--color-success);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.cancel-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.back-home {
+  color: var(--color-muted);
+  text-decoration: none;
+  font-size: var(--fs-sm);
+  transition: color var(--transition-fast);
+}
+
+.back-home:hover {
+  color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .cancel-card {
+    padding: var(--sp-6);
+  }
+
+  .cancel-title {
+    font-size: var(--fs-2xl);
+  }
+}
+

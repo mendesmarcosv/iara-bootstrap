@@ -20,7 +20,12 @@ import { PixPayment } from '../pages/Payment/PixPayment';
 // Redirect to Landing Page
 const RedirectToLanding: React.FC = () => {
   useEffect(() => {
-    window.location.href = 'http://localhost:8000';
+    // Em produção, redireciona para a página principal (index.html na raiz)
+    // Em desenvolvimento, usa localhost:8000
+    const landingUrl = process.env.NODE_ENV === 'production' 
+      ? '/index.html'
+      : 'http://localhost:8000';
+    window.location.href = landingUrl;
   }, []);
   return <div>Redirecionando...</div>;
 };

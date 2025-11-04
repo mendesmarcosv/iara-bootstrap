@@ -164,6 +164,7 @@ export const Register: React.FC = () => {
                         type="password"
                         name="password"
                         id="password"
+                        autoComplete="new-password"
                         className={`form-input ${
                           errors.password && touched.password ? 'input-error' : ''
                         }`}
@@ -180,6 +181,7 @@ export const Register: React.FC = () => {
                         type="password"
                         name="confirmPassword"
                         id="confirmPassword"
+                        autoComplete="new-password"
                         className={`form-input ${
                           errors.confirmPassword && touched.confirmPassword
                             ? 'input-error'

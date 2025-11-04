@@ -94,6 +94,7 @@ export const Login: React.FC = () => {
                     type="password"
                     name="password"
                     id="password"
+                    autoComplete="off"
                     className={`form-input ${
                       errors.password && touched.password ? 'input-error' : ''
                     }`}

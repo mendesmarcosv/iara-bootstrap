@@ -3,50 +3,30 @@
   "devCommand": "cd app && npm start",
   "installCommand": "cd app && npm install",
   "outputDirectory": "app/build",
-  "rewrites": [
+  "routes": [
     {
-      "source": "/",
-      "destination": "/landing/index.html"
+      "src": "/landing/(.*)",
+      "dest": "/landing/$1"
     },
     {
-      "source": "/login",
-      "destination": "/index.html"
+      "src": "/",
+      "dest": "/landing/index.html"
     },
     {
-      "source": "/register",
-      "destination": "/index.html"
+      "src": "/(login|register|catalog|cart|checkout|orders|success|cancel)",
+      "dest": "/index.html"
     },
     {
-      "source": "/catalog",
-      "destination": "/index.html"
+      "src": "/game/(.*)",
+      "dest": "/index.html"
     },
     {
-      "source": "/game/:id",
-      "destination": "/index.html"
+      "src": "/payment/(.*)",
+      "dest": "/index.html"
     },
     {
-      "source": "/cart",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/checkout",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/payment/:type",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/orders",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/success",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/cancel",
-      "destination": "/index.html"
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }

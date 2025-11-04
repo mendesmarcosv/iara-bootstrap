@@ -1,0 +1,63 @@
+/* Campo de busca */
+#busca-nome {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+#busca-nome:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+#busca-nome::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Cards: estilo unificado para Nenhum Resultado e Erro */
+.no-results-card,
+.error-message-card {
+  background: #1e1e1e;
+  border-radius: 24px;
+  padding: 3rem 2rem;
+  text-align: center;
+  margin: 2rem 0;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  border: 1px solid rgba(204, 254, 44, 0.2);
+}
+
+.no-results-icon,
+.error-message-icon {
+  font-size: 4rem;
+  color: var(--color-text-primary);
+  opacity: 0.8;
+}
+
+.no-results-content,
+.error-message-content {
+  max-width: 400px;
+}
+
+.no-results-title,
+.error-message-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-white);
+  margin-bottom: 0.5rem;
+}
+
+.no-results-text,
+.error-message-text {
+  font-size: 1rem;
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  margin: 0;
+}

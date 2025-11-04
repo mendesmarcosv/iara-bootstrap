@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jogos - Iara Games (inline)</title>
+    <!-- Bootstrap CSS via CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+      :root {
+        --color-primary: #ccfe2c;
+        --color-yellow: #fee62c;
+        --color-blue: #2c7afe;
+        --color-text-primary: #8a8a8a;
+        --color-text-dark: #333333;
+        --color-background: #121212;
+        --color-hover: #e0e0e0;
+        --color-white: #ffffff;
+        --color-text-light: #c1c1c1;
+        --color-black: #000000;
+      }
+      body { font-family: "Montserrat", sans-serif; line-height: 1.6; font-size: 16px; background: var(--color-background); color: var(--color-white); overflow-x: hidden; }
+      p { margin-bottom: 0 !important; }
+      .page-wrapper { min-height: 100vh; display: flex; flex-direction: column; }
+      .padding-global { padding-left: 5%; padding-right: 5%; margin: 0 auto; }
+      #main-content { padding-top: 96px; }
+
+      /* Nav apenas com logo */
+      .nav-bar { position: absolute; top: 0; width: 100%; z-index: 100; backdrop-filter: blur(24px); background-color: rgba(46,46,46,0.17); }
+      .nav-wrapper { display: flex; align-items: center; justify-content: center; padding: 20px 0; min-height: 72px; }
+      .brand-svg { width: 220px; height: auto; display: block; }
+
+      /* Título seção */
+      .section-title-gradient { width: 100%; text-align: center; margin-bottom: 64px; font-size: 3.5rem; font-weight: 700; background: linear-gradient(to right, var(--color-primary), #e8ffb1); -webkit-background-clip: text; background-clip: text; color: transparent; position: relative; padding-bottom: 1.5rem; margin-left: auto; margin-right: auto; }
+      .section-title-gradient::after { content: ""; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 150px; height: 4px; background: var(--color-blue); border-radius: 2px; }
+      .section-header-jogos { padding-top: 5rem; margin-bottom: 2rem; }
+
+      /* Layout filtros + lista */
+      .section-games-list { display: grid; grid-template-columns: 250px 1fr; gap: 32px; align-items: start; }
+      .filter-section { background: #1e1e1e; border-radius: 24px; padding: 24px; position: relative; margin-bottom: 32px; }
+      .filter-title { font-size: 18px; font-weight: 600; color: var(--color-white); margin-bottom: 1.5rem; text-align: center; }
+      .filter-options { display: block; }
+      /* Dropdown custom dark */
+      .filter-select-wrap { position: relative; }
+      .filter-select-btn { width: 100%; padding: 12px 44px 12px 16px; background: rgba(255,255,255,0.08); border: none; border-radius: 12px; color: var(--color-white); font-size: 14px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: all 0.2s ease; }
+      .filter-select-btn:hover { background: rgba(255,255,255,0.12); }
+      .filter-select-btn:focus { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+      .filter-select-btn i { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--color-white); opacity: 0.7; font-size: 20px; pointer-events: none; transition: transform 0.2s ease; }
+      .filter-select-wrap.is-open .filter-select-btn i { transform: translateY(-50%) rotate(180deg); }
+      .filter-dropdown { position: absolute; left: 0; right: 0; top: calc(100% + 8px); background: #1e1e1e; border-radius: 12px; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 8px 24px rgba(0,0,0,0.3); max-height: 280px; overflow-y: auto; padding: 8px; display: none; z-index: 10; }
+      .filter-select-wrap.is-open .filter-dropdown { display: block; }
+      .filter-dropdown li { list-style: none; padding: 10px 12px; border-radius: 8px; color: var(--color-white); cursor: pointer; transition: all 0.15s ease; }
+      .filter-dropdown li:hover { background: rgba(255,255,255,0.08); }
+      .filter-dropdown li[aria-selected="true"] { background: var(--color-primary); color: var(--color-black); font-weight: 700; }
+
+      /* Scrollbars (global e dropdown) */
+      html { scrollbar-width: thin; scrollbar-color: var(--color-primary) rgba(255,255,255,0.06); }
+      *::-webkit-scrollbar { width: 10px; height: 10px; }
+      *::-webkit-scrollbar-track { background: rgba(255,255,255,0.06); border-radius: 8px; }
+      *::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--color-primary), #b8e528); border-radius: 8px; border: 2px solid #1e1e1e; }
+      *::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #dafe5a, var(--color-primary)); }
+
+      /* Scrollbar mais fino no dropdown */
+      .filter-dropdown::-webkit-scrollbar { width: 8px; }
+      .filter-dropdown::-webkit-scrollbar-track { background: rgba(255,255,255,0.06); border-radius: 8px; }
+      .filter-dropdown::-webkit-scrollbar-thumb { background: var(--color-primary); border-radius: 8px; border: 2px solid #1e1e1e; }
+
+      /* Cards */
+      .game-card { background: #1e1e1e; border-radius: 24px; overflow: hidden; transition: all 0.3s ease; }
+      .game-card:hover { transform: translateY(-8px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+      .game-image { width: 100%; aspect-ratio: 4/3; object-fit: cover; margin-bottom: 0.25rem; background: #0f0f0f; }
+      /* placeholder quando não há imagem */
+      .game-image--placeholder { display: flex; align-items: center; justify-content: center; font-size: 64px; color: rgba(255,255,255,0.5); }
+      .game-content { padding: 16px; position: relative; }
+      .game-title { font-size: 1.25rem; font-weight: 600; color: var(--color-white); margin-bottom: 0.5rem; }
+      .game-developer { margin-bottom: 12px !important; font-size: 0.875rem; color: rgba(255,255,255,0.7); }
+      .game-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+      .game-tag { padding: 0.25rem 0.75rem; background: rgba(255,255,255,0.1); border-radius: 100px; font-size: 0.75rem; color: var(--color-white); }
+      .game-price-action { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 24px; }
+      .game-price { font-size: 1.5rem; font-weight: 700; color: var(--color-primary); margin: 0; }
+      .buy-button { display: inline-block; padding: 6px 12px; background: rgba(255,255,255,0.05); color: var(--color-primary); border-radius: 100px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s ease; text-decoration: none; margin: 0; }
+      .buy-button:hover { background: var(--color-primary); color: var(--color-black); }
+
+      /* Footer */
+      .footer { background-color: var(--color-primary); border-radius: 48px 48px 0 0; padding: 64px 0 32px 0; margin-top: 120px; position: relative; }
+      .footer-main-content { position: relative; display: flex; flex-direction: column; align-items: center; gap: 32px; padding: 48px; width: 100%; max-width: 800px; margin: 0 auto; }
+      .footer-tagline { color: #121212; font-size: 14px; font-weight: 500; opacity: 0.7; margin-top: 16px; }
+      .footer-content { display: flex; flex-direction: column; align-items: center; gap: 32px; }
+      .footer-brand { display: flex; justify-content: center; }
+      .footer-logo { width: 220px; height: auto; }
+      .footer-divider { width: 100%; max-width: 900px; height: 1px; border-top: 2px dotted #121212; opacity: 0.3; margin: 16px 0; }
+      .footer-bottom { display: flex; flex-direction: row; align-items: center; justify-content: center; width: 100%; max-width: 900px; color: #121212; opacity: 0.7; font-size: 14px; padding: 0 24px; }
+      .footer-corner-left,.footer-corner-right,.footer-corner-bottom-left,.footer-corner-bottom-right { position: absolute; width: 40px; height: 40px; border: 2px solid var(--color-black); opacity: 0.8; }
+      .footer-corner-left { top: 0; left: 0; border-right: none; border-bottom: none; }
+      .footer-corner-right { top: 0; right: 0; border-left: none; border-bottom: none; }
+      .footer-corner-bottom-left { bottom: 0; left: 0; border-right: none; border-top: none; }
+      .footer-corner-bottom-right { bottom: 0; right: 0; border-left: none; border-top: none; }
+
+      /* Input de busca */
+      #busca-nome { width: 100%; padding: 12px 16px; border: 2px solid rgba(255,255,255,0.1); border-radius: 8px; background: rgba(0,0,0,0.8); color: #fff; font-size: 16px; transition: border-color 0.3s ease; }
+      #busca-nome:focus { outline: none; border-color: var(--color-primary); }
+      #busca-nome::placeholder { color: rgba(255,255,255,0.6); }
+
+      /* Cartões de erro */
+      .error-message-card { background: #1e1e1e; border-radius: 24px; padding: 3rem 2rem; text-align: center; min-height: 300px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1.5rem; border: 1px solid rgba(204,254,44,0.2); }
+      .error-message-icon { font-size: 4rem; color: var(--color-text-primary); opacity: 0.8; }
+      .error-message-title { font-size: 1.5rem; font-weight: 600; color: var(--color-white); margin-bottom: 0.5rem; }
+      .error-message-text { font-size: 1rem; color: var(--color-text-primary); line-height: 1.5; margin: 0; }
+
+      /* Responsivo */
+      @media (max-width: 1024px) {
+        .section-games-list { grid-template-columns: 1fr; }
+        .filter-section { position: relative; margin-bottom: 32px; padding: 20px; }
+        .filter-title { margin-bottom: 20px; }
+        .filter-select-btn { padding: 12px 44px 12px 16px; font-size: 13px; }
+        .section-title-gradient { font-size: 2.75rem; margin-bottom: 48px; }
+        #main-content { padding-top: 80px; }
+      }
+      @media screen and (max-width: 767px) {
+        .section-header-jogos { padding-top: 2.25rem; margin-bottom: 1rem; }
+        .filter-section { padding: 16px; }
+        .filter-title { margin-bottom: 16px; font-size: 16px; }
+        .filter-select-btn { padding: 10px 44px 10px 14px; font-size: 12px; }
+        .filter-select-btn i { font-size: 18px; right: 14px; }
+        .section-title-gradient { font-size: 2.25rem; margin-bottom: 48px; padding-bottom: 1.25rem; }
+        .section-title-gradient::after { width: 120px; height: 3px; }
+        #main-content { padding-top: 80px; }
+        .footer-logo { width: 180px; }
+      }
+      @media screen and (max-width: 480px) {
+        .section-title-gradient { font-size: 1.75rem; margin-bottom: 32px; padding-bottom: 1rem; }
+        .section-title-gradient::after { width: 100px; height: 3px; }
+      }
+    </style>
+
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+  </head>
+  <body>
+    <div class="page-wrapper" role="document">
+      <nav class="nav-bar" role="navigation" aria-label="Navegação principal">
+        <div class="padding-global">
+          <div class="container">
+            <div class="nav-wrapper">
+              <!-- LOGO (verde) -->
+              <svg class="brand-svg" viewBox="0 0 921 132" xmlns="http://www.w3.org/2000/svg" fill="none" aria-label="Iara Games">
+                <g clip-path="url(#clip0_149_10)">
+                  <path d="M221.05 92.4001C220 92.4001 219.47 91.8001 219.47 90.5101V41.4701C219.47 40.1901 220 39.5801 220.98 39.5801H235.31V92.3901H221.05V92.4001Z" fill="#CCFE2D"/>
+                  <path d="M268.73 87.1198L265.79 92.3998H246.63L276.88 39.5898H290.16L320.41 92.3998H301.55L298.61 87.1198H268.74H268.73ZM284.95 63.4398H282.39L276.58 73.5498H290.76L284.95 63.4398Z" fill="#CCFE2D"/>
+                  <path d="M395.85 92.3998H379.25L371.1 78.7498H347.56V92.3998H331.72V41.4798C331.72 40.1998 332.25 39.5898 333.23 39.5898H382.12C390.72 39.5898 395.17 41.9998 395.47 46.8298C395.7 51.6598 395.85 55.7298 395.85 59.0498C395.85 61.9898 395.77 64.9298 395.62 67.8798C395.32 74.0698 392.53 77.4598 387.25 78.2898L395.85 92.3998ZM375.48 65.9998C377.97 65.9998 379.25 64.7198 379.25 62.2298V56.7198C379.25 54.1598 377.97 52.8698 375.48 52.8698H349.83C348.32 52.8698 347.57 53.5498 347.57 54.8298V64.0298C347.57 65.3098 348.32 65.9898 349.83 65.9898H375.48V65.9998Z" fill="#CCFE2D"/>
+                  <path d="M429.28 87.1198L426.34 92.3998H407.18L437.43 39.5898H450.71L480.96 92.3998H462.1L459.16 87.1198H429.29H429.28ZM445.5 63.4398H442.94L437.13 73.5498H451.31L445.5 63.4398Z" fill="#CCFE2D"/>
+                  <path d="M556.09 73.5398V65.9998C556.09 63.5098 557.37 62.2298 559.86 62.2298H593.81C596.3 62.2298 597.58 63.5098 597.58 65.9998V77.3198C597.58 87.3498 591.32 92.4098 578.72 92.4798L547.19 92.3998C538.59 92.3998 534.14 89.0798 533.91 82.4398C533.68 75.8798 533.53 70.3698 533.53 65.9898C533.53 61.6098 533.61 57.1598 533.76 52.7898C534.14 43.9598 538.59 39.5898 547.19 39.5898H583.86C592.46 39.5898 596.99 43.9698 597.36 52.7898L597.51 58.3698H581.06C581.06 54.6698 578.57 52.8598 573.52 52.8598H553.15C550.66 52.8598 549.38 54.1398 549.38 56.7098V75.4198C549.38 77.6098 550.66 78.7398 553.15 78.7398H577.29C579.78 78.7398 581.06 76.9998 581.06 73.5298H556.09V73.5398Z" fill="#CCFE2D"/>
+                  <path d="M631 87.1198L628.06 92.3998H608.9L639.15 39.5898H652.43L682.68 92.3998H663.82L660.88 87.1198H631.01H631ZM647.22 63.4398H644.66L638.85 73.5498H653.03L647.22 63.4398Z" fill="#CCFE2D"/>
+                  <path d="M709.84 92.4001H695.73C694.6 92.4001 694 91.8001 694 90.5101V41.4701C694 40.1901 694.53 39.5801 695.66 39.5801H709.84L729.3 71.2601H732.85L752.09 39.5801H767.78C768.91 39.5801 769.44 40.1801 769.44 41.4701V90.8801C769.44 91.8601 768.91 92.3901 767.78 92.3901H752.09V71.1901L738.44 92.3901H723.35L709.85 71.0401V92.3901L709.84 92.4001Z" fill="#CCFE2D"/>
+                  <path d="M844.89 82.5201V92.4001H782.35C781.29 92.4001 780.77 91.8001 780.77 90.5101V41.4701C780.77 40.1901 781.3 39.5801 782.28 39.5801H841.12C843.61 39.5801 844.89 40.7901 844.89 43.2801V52.9401H794.34C792.83 52.9401 792.08 53.6201 792.08 54.9001V62.2201H840.36C842.09 62.3001 842.92 62.8201 842.92 63.8001V73.7601H792.07V76.7801C792.07 78.0601 792.82 78.7401 794.33 78.7401H841.1C843.59 78.7401 844.87 80.0201 844.87 82.5101L844.89 82.5201Z" fill="#CCFE2D"/>
+                  <path d="M920.93 76.3401C920.93 87.0501 916.25 92.4101 906.9 92.4101H870.24C861.11 92.4101 856.58 87.8101 856.58 78.6001V78.4501L856.5 73.5501H872.04C872.04 77.0201 873.78 78.7601 877.32 78.7601H899.95C902.44 78.7601 903.72 77.7001 903.72 75.5901C903.72 73.4801 902.44 72.4201 899.95 72.4201H867.81C860.04 72.4201 856.19 66.7601 856.19 55.5201C856.19 44.8801 860.04 39.6001 867.81 39.6001H906.89C915.49 39.6001 920.02 43.9801 920.47 52.8001L920.62 58.4601H903.72C903.72 54.7601 901.98 52.8801 898.44 52.8801H875.81C873.32 52.8801 872.04 54.0901 872.04 56.5801C872.04 59.0701 873.32 60.3501 875.81 60.3501H906.89C916.24 60.3501 920.92 65.7101 920.92 76.3401H920.93Z" fill="#CCFE2D"/>
+                  <path d="M178.05 42.1602H176.05V89.9202H178.05V42.1602Z" fill="#CCFE2D"/>
+                  <path d="M102.11 0H29.89C13.3822 0 0 13.3822 0 29.89V102.11C0 118.618 13.3822 132 29.89 132H102.11C118.618 132 132 118.618 132 102.11V29.89C132 13.3822 118.618 0 102.11 0Z" fill="#CCFE2D"/>
+                  <path d="M80.83 47.6299L75.73 93.1199C75.64 93.9299 76.35 94.5999 77.15 94.4599L89.15 92.4299C90.18 92.2599 90.95 93.3799 90.4 94.2699L82 108.16C81.85 108.4 81.63 108.58 81.36 108.68L59.91 116.35C59.51 116.49 59.06 116.42 58.73 116.15L52.97 111.55C52.78 111.4 52.65 111.2 52.57 110.98L52.55 110.91C52.5 110.74 52.48 110.57 52.5 110.4L57.14 66.7799C57.23 65.9499 56.48 65.2799 55.67 65.4499L43 68.1299C41.95 68.3499 41.14 67.2099 41.7 66.2899L47.99 56.0799C48.15 55.8299 48.39 55.6399 48.68 55.5499L79.25 46.3199C80.09 46.0699 80.92 46.7599 80.82 47.6299H80.83Z" fill="black"/>
+                  <path d="M70.99 40.68L59.59 43.73C59.16 43.84 58.71 43.73 58.4 43.41L50.18 35.05C49.83 34.69 49.73 34.15 49.94 33.69L53.41 26C53.56 25.66 53.85 25.42 54.21 25.32L71.4 20.72C71.6 20.67 71.82 20.66 72.02 20.72C72.25 20.78 72.46 20.9 72.62 21.08L76.69 25.54C77 25.88 77.1 26.38 76.93 26.81L71.83 39.96C71.69 40.32 71.38 40.6 71 40.7L70.99 40.68Z" fill="black"/>
+                </g>
+                <defs><clipPath id="clip0_149_10"><rect width="920.93" height="132" fill="white"/></clipPath></defs>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <main id="main-content" role="main">
+        <section class="padding-global" aria-labelledby="jogos-title">
+          <div class="container">
+            <div class="section-header-jogos">
+              <h1 id="jogos-title" class="section-title-gradient">Lista de jogos</h1>
+            </div>
+
+            <div class="mb-5">
+              <label for="busca-nome" class="visually-hidden">Buscar pelo nome</label>
+              <input id="busca-nome" type="search" placeholder="Buscar jogo pelo nome..." aria-label="Buscar jogo pelo nome" />
+            </div>
+
+            <div class="section-games-list">
+              <div class="filter-section" role="complementary" aria-label="Filtros de jogos">
+                <h2 class="filter-title" id="filter-title">Filtrar por categoria</h2>
+                <div class="filter-options" aria-labelledby="filter-title" id="filtros-categorias">
+                  <div class="filter-select-wrap" id="categoria-wrap">
+                    <button type="button" id="categoria-btn" class="filter-select-btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="categoria-list">
+                      <span id="categoria-label">Todos</span>
+                      <i class="ph ph-caret-down" aria-hidden="true"></i>
+                    </button>
+                    <ul id="categoria-list" class="filter-dropdown" role="listbox" tabindex="-1" aria-labelledby="categoria-btn">
+                      <li role="option" data-value="" aria-selected="true">Todos</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="games-content-column">
+                <div class="games-list-grid row gx-2 g-4" role="list" aria-label="Lista de jogos disponíveis" id="lista-jogos"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer" role="contentinfo">
+        <div class="padding-global">
+          <div class="container">
+            <div class="footer-content">
+              <div class="footer-main-content position-relative">
+                <div class="footer-corner-left position-absolute" aria-hidden="true"></div>
+                <div class="footer-corner-right position-absolute" aria-hidden="true"></div>
+                <div class="footer-corner-bottom-left position-absolute" aria-hidden="true"></div>
+                <div class="footer-corner-bottom-right position-absolute" aria-hidden="true"></div>
+                <div class="footer-brand text-center mb-4">
+                  <!-- LOGO preto no rodapé -->
+                  <svg class="footer-logo" viewBox="0 0 921 132" xmlns="http://www.w3.org/2000/svg" fill="none" aria-label="Iara Games">
+                    <g clip-path="url(#clip0_149_726)">
+                      <path d="M221.05 92.4001C220 92.4001 219.47 91.8001 219.47 90.5101V41.4701C219.47 40.1901 220 39.5801 220.98 39.5801H235.31V92.3901H221.05V92.4001Z" fill="black"/>
+                      <path d="M268.73 87.1198L265.79 92.3998H246.63L276.88 39.5898H290.16L320.41 92.3998H301.55L298.61 87.1198H268.74H268.73ZM284.95 63.4398H282.39L276.58 73.5498H290.76L284.95 63.4398Z" fill="black"/>
+                      <path d="M395.851 92.3998H379.251L371.101 78.7498H347.561V92.3998H331.721V41.4798C331.721 40.1998 332.251 39.5898 333.231 39.5898H382.121C390.721 39.5898 395.171 41.9998 395.471 46.8298C395.701 51.6598 395.851 55.7298 395.851 59.0498C395.851 61.9898 395.771 64.9298 395.621 67.8798C395.321 74.0698 392.531 77.4598 387.251 78.2898L395.851 92.3998ZM375.481 65.9998C377.971 65.9998 379.251 64.7198 379.251 62.2298V56.7198C379.251 54.1598 377.971 52.8698 375.481 52.8698H349.831C348.321 52.8698 347.571 53.5498 347.571 54.8298V64.0298C347.571 65.3098 348.321 65.9898 349.831 65.9898H375.481V65.9998Z" fill="black"/>
+                      <path d="M429.281 87.1198L426.341 92.3998H407.181L437.431 39.5898H450.711L480.961 92.3998H462.101L459.161 87.1198H429.291H429.281ZM445.501 63.4398H442.941L437.131 73.5498H451.311L445.501 63.4398Z" fill="black"/>
+                      <path d="M556.09 73.5398V65.9998C556.09 63.5098 557.37 62.2298 559.86 62.2298H593.81C596.3 62.2298 597.58 63.5098 597.58 65.9998V77.3198C597.58 87.3498 591.32 92.4098 578.72 92.4798L547.19 92.3998C538.59 92.3998 534.14 89.0798 533.91 82.4398C533.68 75.8798 533.53 70.3698 533.53 65.9898C533.53 61.6098 533.61 57.1598 533.76 52.7898C534.14 43.9598 538.59 39.5898 547.19 39.5898H583.86C592.46 39.5898 596.99 43.9698 597.36 52.7898L597.51 58.3698H581.06C581.06 54.6698 578.57 52.8598 573.52 52.8598H553.15C550.66 52.8598 549.38 54.1398 549.38 56.7098V75.4198C549.38 77.6098 550.66 78.7398 553.15 78.7398H577.29C579.78 78.7398 581.06 76.9998 581.06 73.5298H556.09V73.5398Z" fill="black"/>
+                      <path d="M631 87.1198L628.06 92.3998H608.9L639.15 39.5898H652.43L682.68 92.3998H663.82L660.88 87.1198H631.01H631ZM647.22 63.4398H644.66L638.85 73.5498H653.03L647.22 63.4398Z" fill="black"/>
+                      <path d="M709.84 92.4001H695.73C694.6 92.4001 694 91.8001 694 90.5101V41.4701C694 40.1901 694.53 39.5801 695.66 39.5801H709.84L729.3 71.2601H732.85L752.09 39.5801H767.78C768.91 39.5801 769.44 40.1801 769.44 41.4701V90.8801C769.44 91.8601 768.91 92.3901 767.78 92.3901H752.09V71.1901L738.44 92.3901H723.35L709.85 71.0401V92.3901L709.84 92.4001Z" fill="black"/>
+                      <path d="M844.891 82.5201V92.4001H782.35C781.29 92.4001 780.771 91.8001 780.771 90.5101V41.4701C780.771 40.1901 781.301 39.5801 782.281 39.5801H841.12C843.61 39.5801 844.891 40.7901 844.891 43.2801V52.9401H794.341C792.831 52.9401 792.081 53.6201 792.081 54.9001V62.2201H840.36C842.09 62.3001 842.92 62.8201 842.92 63.8001V73.7601H792.07V76.7801C792.07 78.0601 792.821 78.7401 794.331 78.7401H841.1C843.59 78.7401 844.87 80.0201 844.87 82.5101L844.891 82.5201Z" fill="black"/>
+                      <path d="M920.93 76.3396C920.93 87.0496 916.25 92.4096 906.9 92.4096H870.24C861.11 92.4096 856.58 87.8096 856.58 78.5996V78.4496L856.5 73.5496H872.04C872.04 77.0196 873.78 78.7596 877.32 78.7596H899.95C902.44 78.7596 903.72 77.6996 903.72 75.5896C903.72 73.4796 902.44 72.4196 899.95 72.4196H867.81C860.04 72.4196 856.19 66.7596 856.19 55.5196C856.19 44.8796 860.04 39.5996 867.81 39.5996H906.89C915.49 39.5996 920.02 43.9796 920.47 52.7996L920.62 58.4596H903.72C903.72 54.7596 901.98 52.8796 898.44 52.8796H875.81C873.32 52.8796 872.04 54.0896 872.04 56.5796C872.04 59.0696 873.32 60.3496 875.81 60.3496H906.89C916.24 60.3496 920.92 65.7096 920.92 76.3396H920.93Z" fill="black"/>
+                      <path d="M178.05 42.1602H176.05V89.9202H178.05V42.1602Z" fill="black"/>
+                      <path d="M102.11 0H29.89C13.3822 0 0 13.3822 0 29.89V102.11C0 118.618 13.3822 132 29.89 132H102.11C118.618 132 132 118.618 132 102.11V29.89C132 13.3822 118.618 0 102.11 0Z" fill="black"/>
+                      <path d="M80.8299 47.6304L75.7299 93.1204C75.6399 93.9304 76.3499 94.6004 77.1499 94.4604L89.1499 92.4304C90.1799 92.2604 90.9499 93.3804 90.3999 94.2704L81.9999 108.16C81.8499 108.4 81.6299 108.58 81.3599 108.68L59.9099 116.35C59.5099 116.49 59.0599 116.42 58.7299 116.15L52.9699 111.55C52.7799 111.4 52.6499 111.2 52.5699 110.98L52.5499 110.91C52.4999 110.74 52.4799 110.57 52.4999 110.4L57.1399 66.7804C57.2299 65.9504 56.4799 65.2804 55.6699 65.4504L42.9999 68.1304C41.9499 68.3504 41.1399 67.2104 41.6999 66.2904L47.9899 56.0804C48.1499 55.8304 48.3899 55.6404 48.6799 55.5504L79.2499 46.3204C80.0899 46.0704 80.9199 46.7604 80.8199 47.6304H80.8299Z" fill="#CCFE2D"/>
+                      <path d="M70.9897 40.68L59.5897 43.73C59.1597 43.84 58.7097 43.73 58.3997 43.41L50.1797 35.05C49.8297 34.69 49.7297 34.15 49.9397 33.69L53.4097 26C53.5597 25.66 53.8497 25.42 54.2097 25.32L71.3997 20.72C71.5997 20.67 71.8197 20.66 72.0197 20.72C72.2497 20.78 72.4597 20.9 72.6197 21.08L76.6897 25.54C76.9997 25.88 77.0997 26.38 76.9297 26.81L71.8297 39.96C71.6897 40.32 71.3797 40.6 70.9997 40.7L70.9897 40.68Z" fill="#CCFE2D"/>
+                    </g>
+                    <defs><clipPath id="clip0_149_726"><rect width="920.93" height="132" fill="white"/></clipPath></defs>
+                  </svg>
+                </div>
+
+                <p class="footer-tagline text-center small mb-0">Feito com ❤️ para a cultura brasileira</p>
+              </div>
+
+              <div class="footer-divider my-4" aria-hidden="true"></div>
+
+              <div class="footer-bottom text-center">
+                <p class="text-size-sm mb-2">©2025 IARA GAMES™ // Todos direitos reservados</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <script>
+      // Utils
+      function norm(s){ s=(s||"").toString(); try{s=s.normalize("NFD");}catch(e){} return s.replace(/[\u0300-\u036f]/g,"").toLowerCase().trim(); }
+      function alerta(msg){ if(!msg){return;} renderErrorMessage(msg,"ph-warning-circle"); }
+      function anunciar(texto){
+        var status=document.getElementById("filter-status");
+        if(!status){ status=document.createElement("div"); status.id="filter-status"; status.className="visually-hidden"; status.setAttribute("role","status"); status.setAttribute("aria-live","polite"); (document.querySelector(".filter-section")||document.body).appendChild(status); }
+        status.textContent=texto;
+      }
+
+      // Render
+      function renderCard(jogo){
+        var col=document.createElement("div");
+        col.className="col-sm-6 col-md-4 col-lg-4";
+        col.setAttribute("role","listitem");
+
+        var card=document.createElement("div");
+        card.className="game-card h-100";
+        card.setAttribute("role","article");
+        card.setAttribute("data-categoria",(jogo.categoria||[]).join(" "));
+
+        // Imagem OU placeholder
+        var imgWrap=document.createElement("div");
+        imgWrap.className="game-image";
+        if(jogo.imagem){
+          var img=document.createElement("img");
+          img.className="game-image";
+          img.src=jogo.imagem;
+          img.alt="Capa do jogo "+(jogo.nome||"");
+          // se der erro no carregamento, cai para placeholder
+          img.onerror=function(){ img.replaceWith(makePlaceholder()); };
+          card.appendChild(img);
+        } else {
+          card.appendChild(makePlaceholder());
+        }
+
+        function makePlaceholder(){
+          var ph=document.createElement("div");
+          ph.className="game-image game-image--placeholder";
+          var i=document.createElement("i");
+          i.className="ph ph-sword";
+          i.setAttribute("aria-hidden","true");
+          ph.appendChild(i);
+          return ph;
+        }
+
+        var content=document.createElement("div");
+        content.className="game-content";
+
+        var h3=document.createElement("h3");
+        h3.className="game-title";
+        h3.textContent=jogo.nome||"";
+
+        var dev=document.createElement("p");
+        dev.className="game-developer";
+        dev.textContent=jogo.dev||"";
+
+        var tags=document.createElement("div");
+        tags.className="game-tags";
+        tags.setAttribute("role","list");
+        tags.setAttribute("aria-label","Categorias do jogo");
+        var cats=jogo.categoria||[];
+        for(var i=0;i<cats.length;i++){ var tag=document.createElement("span"); tag.className="game-tag"; tag.setAttribute("role","listitem"); tag.textContent=cats[i]; tags.appendChild(tag); }
+
+        var pa=document.createElement("div");
+        pa.className="game-price-action";
+
+        var precoEl=document.createElement("p");
+        precoEl.className="game-price";
+        var v=(typeof jogo.preco==="number")?jogo.preco:Number(jogo.preco);
+        var pf=isNaN(v)?"":("R$ "+v.toFixed(2).replace(".",","));
+        precoEl.textContent=pf;
+        precoEl.setAttribute("aria-label","Preço: "+pf);
+
+        var link=document.createElement("a");
+        link.href=jogo.link||"#";
+        link.className="buy-button";
+        link.setAttribute("role","button");
+        link.setAttribute("aria-label","Comprar jogo "+(jogo.nome||""));
+        link.textContent="Comprar jogo";
+
+        pa.appendChild(precoEl);
+        pa.appendChild(link);
+
+        content.appendChild(h3);
+        if(jogo.dev) content.appendChild(dev);
+        if(cats.length>0) content.appendChild(tags);
+        content.appendChild(pa);
+
+        card.appendChild(content);
+        col.appendChild(card);
+        return col;
+      }
+
+      function renderNoResults(){
+        var grid=document.getElementById("lista-jogos");
+        if(!grid) return;
+        grid.innerHTML="";
+        alerta("Nenhum jogo encontrado. Tente ajustar os filtros ou a busca.");
+      }
+
+      function renderErrorMessage(message, iconClass){
+        var grid=document.getElementById("lista-jogos");
+        grid.innerHTML="";
+        var col=document.createElement("div"); col.className="col-12"; col.setAttribute("role","listitem");
+        var card=document.createElement("div"); card.className="error-message-card"; card.setAttribute("role","alert");
+        var iconContainer=document.createElement("div"); iconContainer.className="error-message-icon";
+        var icon=document.createElement("i"); icon.setAttribute("class",iconClass||"ph-warning"); icon.setAttribute("aria-hidden","true");
+        var title=document.createElement("h3"); title.className="error-message-title"; title.textContent="Ops! Algo deu errado";
+        var text=document.createElement("p"); text.className="error-message-text"; text.textContent=message||"Ocorreu um erro inesperado. Tente novamente mais tarde.";
+        iconContainer.appendChild(icon);
+        card.appendChild(iconContainer); card.appendChild(title); card.appendChild(text); col.appendChild(card); grid.appendChild(col);
+      }
+
+      function renderLista(jogos){
+        var grid=document.getElementById("lista-jogos");
+        if(jogos.length===0){ renderNoResults(); anunciar("Nenhum jogo encontrado"); }
+        else { grid.innerHTML=""; var frag=document.createDocumentFragment(); for(var i=0;i<jogos.length;i++){ frag.appendChild(renderCard(jogos[i])); } grid.appendChild(frag); anunciar(jogos.length+" jogos exibidos"); }
+      }
+
+      function renderCategorias(categorias){
+        var list = document.getElementById("categoria-list");
+        if (!list) return;
+        list.innerHTML = "";
+        // Adiciona opção 'Todos'
+        var liTodos = document.createElement("li");
+        liTodos.setAttribute("role","option");
+        liTodos.setAttribute("data-value", "");
+        liTodos.setAttribute("aria-selected", "true");
+        liTodos.textContent = "Todos";
+        list.appendChild(liTodos);
+        // Adiciona categorias
+        for (var j=0;j<categorias.length;j++){
+          var labelTxt = categorias[j].label || categorias[j].id || "";
+          var id = norm(labelTxt);
+          var li = document.createElement("li");
+          li.setAttribute("role","option");
+          li.setAttribute("data-value", id);
+          li.setAttribute("aria-selected", "false");
+          li.textContent = labelTxt;
+          list.appendChild(li);
+        }
+      }
+
+      // APIs
+      function apiTodos(){ return fetch("/api/jogos",{cache:"no-store"}).then(function(r){if(!r.ok) throw new Error("Falha /api/jogos:"+r.status); return r.json();}); }
+      function apiCategorias(){ return fetch("/api/jogos/lista-categorias",{cache:"no-store"}).then(function(r){if(!r.ok) throw new Error("Falha /api/jogos/lista-categorias:"+r.status); return r.json();}).then(function(d){return (d&&d.categorias)?d.categorias:[];}); }
+      function apiPorNome(nome){ return fetch("/api/jogos/nome?nome="+encodeURIComponent(nome),{cache:"no-store"}).then(function(r){if(!r.ok) throw new Error("Falha /api/jogos/nome:"+r.status); return r.json();}).then(function(d){return d&&d.resultados?d.resultados:[];}); }
+      function apiPorCategoria(cat){ return fetch("/api/jogos/categoria?cat="+encodeURIComponent(cat),{cache:"no-store"}).then(function(r){if(!r.ok) throw new Error("Falha /api/jogos/categoria:"+r.status); return r.json();}).then(function(d){return d&&d.resultados?d.resultados:[];}); }
+
+      // Estado & filtros
+      var cacheTodos=[]; var filtroCategoria=null; var termoNome="";
+      function atualizar(){
+        var p;
+        if(!filtroCategoria && !termoNome){ renderLista(cacheTodos); return; }
+        else if(filtroCategoria && !termoNome){ p=apiPorCategoria(filtroCategoria); }
+        else if(!filtroCategoria && termoNome){ p=apiPorNome(termoNome); }
+        else { p=apiPorCategoria(filtroCategoria).then(function(lista){ var r=[]; for(var i=0;i<lista.length;i++){ if(norm(lista[i].nome).indexOf(norm(termoNome))>-1) r.push(lista[i]); } return r;}); }
+        p.then(function(base){ renderLista(base); }).catch(function(e){ console.error(e); alerta("Erro ao atualizar a lista."); });
+      }
+
+      function ligarEventos(){
+        var wrap = document.getElementById("categoria-wrap");
+        var btn = document.getElementById("categoria-btn");
+        var list = document.getElementById("categoria-list");
+        var label = document.getElementById("categoria-label");
+
+        function closeDropdown(){
+          if (wrap) wrap.classList.remove("is-open");
+          if (btn) btn.setAttribute("aria-expanded","false");
+        }
+        function openDropdown(){
+          if (wrap) wrap.classList.add("is-open");
+          if (btn) btn.setAttribute("aria-expanded","true");
+        }
+
+        if (btn){
+          btn.addEventListener("click", function(){
+            var isOpen = wrap.classList.contains("is-open");
+            if (isOpen) closeDropdown(); else openDropdown();
+          });
+        }
+
+        // Fecha ao clicar fora
+        document.addEventListener("click", function(e){
+          if (wrap && !wrap.contains(e.target)) closeDropdown();
+        });
+
+        // Seleciona categoria ao clicar
+        if (list){
+          list.addEventListener("click", function(e){
+            var li = e.target.closest("li[role='option']");
+            if (!li) return;
+            var v = li.getAttribute("data-value") || "";
+            filtroCategoria = v ? v : null;
+            // Atualiza visual
+            var items = list.querySelectorAll("li[role='option']");
+            for (var i=0;i<items.length;i++){ items[i].setAttribute("aria-selected","false"); }
+            li.setAttribute("aria-selected","true");
+            if (label) label.textContent = li.textContent || "Todos";
+            closeDropdown();
+            atualizar();
+          });
+        }
+
+        var busca=document.getElementById("busca-nome"); var debounce;
+        busca.addEventListener("input",function(){ clearTimeout(debounce); debounce=setTimeout(function(){ termoNome=busca.value||""; atualizar(); },200); });
+      }
+
+      // Init
+      document.addEventListener("DOMContentLoaded",function(){
+        alerta("Carregando dados...");
+        Promise.all([apiCategorias(), apiTodos()]).then(function(arr){
+          var cats=arr[0], todos=arr[1];
+          cacheTodos=Array.isArray(todos)?todos:[];
+          renderCategorias(cats||[]);
+          var lbl=document.getElementById("categoria-label"); if(lbl) lbl.textContent = "Todos";
+          renderLista(cacheTodos);
+          ligarEventos();
+          alerta("");
+        }).catch(function(e){ console.error(e); alerta("Não foi possível carregar. Verifique o Inject 'Carregar Jogos' e as rotas /api."); });
+      });
+    </script>
+  </body>
+</html>

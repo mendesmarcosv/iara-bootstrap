@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jogos - Iara Games (inline)</title>
+    <!-- Bootstrap CSS via CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- CSS mínimo necessário (apenas classes usadas) -->
+    <style>
+      :root {
+        --color-primary: #ccfe2c;
+        --color-yellow: #fee62c;
+        --color-blue: #2c7afe;
+        --color-text-primary: #8a8a8a;
+        --color-text-dark: #333333;
+        --color-background: #121212;
+        --color-hover: #e0e0e0;
+        --color-white: #ffffff;
+        --color-text-light: #c1c1c1;
+        --color-black: #000000;
+      }
+
+      body {
+        font-family: "Montserrat", sans-serif;
+        line-height: 1.6;
+        font-size: 16px;
+        background: var(--color-background);
+        color: var(--color-white);
+        overflow-x: hidden;
+      }
+      p { margin-bottom: 0 !important; }
+
+      .page-wrapper { min-height: 100vh; display: flex; flex-direction: column; }
+      .padding-global { padding-left: 5%; padding-right: 5%; margin: 0 auto; }
+      #main-content { padding-top: 96px; }
+
+      /* Nav */
+      .nav-bar { position: absolute; top: 0; width: 100%; z-index: 100; backdrop-filter: blur(24px); background-color: rgba(46,46,46,0.17); }
+      .nav-wrapper { display: flex; flex-direction: row; justify-content: space-between; padding: 20px 0; position: relative; min-height: 72px; }
+      .left-wrapper { display: flex; flex-direction: row; align-items: center; justify-content: right; gap: 16px; }
+      .right-wrapper { display: flex; flex-direction: row; align-items: center; justify-content: right; gap: 32px; }
+      nav ul { list-style: none; display: flex; justify-content: center; gap: 16px; padding: 0 !important; margin: 0 !important; }
+      nav a { text-decoration: none; color: var(--color-text-primary); font-weight: bold; transition: all 0.3s ease; display: flex; align-items: center; }
+      nav a:hover { color: var(--color-primary); text-shadow: 0 0 10px rgba(204,254,44,0.3); }
+      nav a.active { color: var(--color-primary); }
+      .nav-link-wrap { display: flex; flex-direction: row; align-items: center; justify-content: center; padding: 8px 16px; font-size: 18px; gap: 16px; }
+      .nav-link-wrap svg { transition: all 0.3s ease; }
+      nav a:hover .nav-link-wrap svg { filter: drop-shadow(0 0 8px rgba(204,254,44,0.4)); }
+      .nav-icon { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
+      .nav-brand { display: flex; align-items: center; justify-content: center; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+      .nav-brand-icon { width: 48px; height: 48px; transition: all 0.3s ease; }
+      .nav-brand-icon:hover { filter: drop-shadow(0 0 8px rgba(204,254,44,0.4)); transform: scale(1.1); }
+      .nav-utility-wrapper { display: flex; gap: 16px; align-items: center; }
+      .nav-utility-link { display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; color: var(--color-white); width: 24px; height: 24px; }
+      .nav-utility-link:hover { color: var(--color-primary); }
+      .nav-user-balance { display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 16px; padding: 8px 32px 8px 8px; position: relative; background-color: #121212; border-radius: 100px; backdrop-filter: blur(4px); box-shadow: 4px 4px 7px rgba(0,0,0,0.26); border: 3px solid rgba(189,189,189,0.08); transition: all 0.3s ease; }
+      .nav-user-balance:hover { border-color: var(--color-primary); box-shadow: 0 0 15px rgba(204,254,44,0.2); }
+      .balance-text { font-size: 16px; font-weight: 500; color: var(--color-primary); }
+      .nav-user-balance-icon { width: 40px; height: 40px; transition: all 0.3s ease; }
+      .nav-user-balance:hover .nav-user-balance-icon { filter: drop-shadow(0 0 8px rgba(204,254,44,0.4)); animation: slowRotate 8s linear infinite; }
+      .balance-curved-line-gradient { position: absolute; right: 8px; }
+      .nav-user-profile-wrapper { overflow: hidden; border-radius: 100px; width: 60px; height: 60px; box-shadow: 4px 4px 7px rgba(0,0,0,0.26); border: 3px solid rgba(189,189,189,0.08); transition: all 0.3s ease; }
+      .nav-user-profile-wrapper:hover { border-color: var(--color-primary); box-shadow: 0 0 15px rgba(204,254,44,0.2); }
+      .nav-user-profile-icon { width: 100%; height: 100%; object-fit: cover; }
+
+      @keyframes slowRotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+      /* Header seção */
+      .section-title-gradient { width: 100%; text-align: center; margin-bottom: 64px; font-size: 3.5rem; font-weight: 700; background: linear-gradient(to right, var(--color-primary), #e8ffb1); -webkit-background-clip: text; background-clip: text; color: transparent; position: relative; padding-bottom: 1.5rem; margin-left: auto; margin-right: auto; }
+      .section-title-gradient::after { content: ""; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 150px; height: 4px; background: var(--color-blue); border-radius: 2px; }
+      .section-header-jogos { padding-top: 5rem; margin-bottom: 2rem; }
+
+      /* Filtros e lista */
+      .section-games-list { display: grid; grid-template-columns: 250px 1fr; gap: 32px; align-items: start; }
+      .filter-section { background: #1e1e1e; border-radius: 24px; padding: 24px; position: sticky; top: 24px; margin-bottom: 32px; }
+      .filter-title { font-size: 18px; font-weight: 600; color: var(--color-white); margin-bottom: 1.5rem; text-align: center; }
+      .filter-options { display: flex; flex-direction: row; flex-wrap: wrap; gap: 8px; }
+      .filter-option { display: none; }
+      .filter-label { display: flex; align-items: center; justify-content: center; padding: 12px 16px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 100px; cursor: pointer; font-size: 14px; color: var(--color-white); transition: all 0.2s ease; width: 100%; text-align: center; }
+      .filter-label:hover { background: rgba(255,255,255,0.15); }
+      .filter-option:checked + .filter-label { background: var(--color-primary); color: var(--color-black); border-color: var(--color-primary); font-weight: 700; }
+
+      /* Card de jogo */
+      .game-card { background: #1e1e1e; border-radius: 24px; overflow: hidden; transition: all 0.3s ease; }
+      .game-card:hover { transform: translateY(-8px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+      .game-image { width: 100%; aspect-ratio: 4/3; object-fit: cover; margin-bottom: 0.25rem; }
+      .game-content { padding: 16px; position: relative; }
+      .game-title { font-size: 1.25rem; font-weight: 600; color: var(--color-white); margin-bottom: 0.5rem; }
+      .game-developer { font-size: 0.875rem; color: rgba(255,255,255,0.7); margin-bottom: 1rem; }
+      .game-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+      .game-tag { padding: 0.25rem 0.75rem; background: rgba(255,255,255,0.1); border-radius: 100px; font-size: 0.75rem; color: var(--color-white); }
+      .game-price-action { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 24px; }
+      .game-price { font-size: 1.5rem; font-weight: 700; color: var(--color-primary); margin: 0; }
+      .buy-button { display: inline-block; padding: 6px 12px; background: rgba(255,255,255,0.05); color: var(--color-primary); border-radius: 100px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s ease; text-decoration: none; margin: 0; }
+      .buy-button:hover { background: var(--color-primary); color: var(--color-black); }
+
+      /* Contador do carrinho no nav */
+      .cart-counter { position: absolute; top: -5px; right: -10px; background-color: var(--color-primary); color: var(--color-black); border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; border: 2px solid var(--color-background); display: none; }
+
+      /* Footer */
+      .footer { background-color: var(--color-primary); border-radius: 48px 48px 0 0; padding: 64px 0 32px 0; margin-top: 120px; position: relative; }
+      .footer-main-content { position: relative; display: flex; flex-direction: column; align-items: center; gap: 32px; padding: 48px; width: 100%; max-width: 800px; margin: 0 auto; }
+      .footer-tagline { color: #121212; font-size: 14px; font-weight: 500; opacity: 0.7; margin-top: 16px; }
+      .footer-content { display: flex; flex-direction: column; align-items: center; gap: 32px; }
+      .footer-brand { display: flex; justify-content: center; }
+      .footer-logo { height: 80px; width: auto; }
+      .footer-links { display: flex; gap: 32px; margin-top: 8px; }
+      .footer-link { color: #121212; text-decoration: none; font-weight: 600; font-size: 18px; transition: all 0.3s ease; }
+      .footer-link:hover { opacity: 0.7; }
+      .footer-divider { width: 100%; max-width: 900px; height: 1px; border-top: 2px dotted #121212; opacity: 0.3; margin: 16px 0; }
+      .footer-bottom { display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 100%; max-width: 900px; color: #121212; opacity: 0.7; font-size: 14px; padding: 0 24px; }
+      .footer-corner-left,.footer-corner-right,.footer-corner-bottom-left,.footer-corner-bottom-right { position: absolute; width: 40px; height: 40px; border: 2px solid var(--color-black); opacity: 0.8; }
+      .footer-corner-left { top: 0; left: 0; border-right: none; border-bottom: none; }
+      .footer-corner-right { top: 0; right: 0; border-left: none; border-bottom: none; }
+      .footer-corner-bottom-left { bottom: 0; left: 0; border-right: none; border-top: none; }
+      .footer-corner-bottom-right { bottom: 0; right: 0; border-left: none; border-top: none; }
+
+      /* Input de busca */
+      #busca-nome { width: 100%; padding: 12px 16px; border: 2px solid rgba(255,255,255,0.1); border-radius: 8px; background: rgba(0,0,0,0.8); color: #fff; font-size: 16px; transition: border-color 0.3s ease; }
+      #busca-nome:focus { outline: none; border-color: var(--color-primary); }
+      #busca-nome::placeholder { color: rgba(255,255,255,0.6); }
+
+      /* Cartões de erro (exibidos via JS) */
+      .error-message-card { background: #1e1e1e; border-radius: 24px; padding: 3rem 2rem; text-align: center; margin: 0 0; min-height: 300px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1.5rem; border: 1px solid rgba(204,254,44,0.2); }
+      .error-message-icon { font-size: 4rem; color: var(--color-text-primary); opacity: 0.8; }
+      .error-message-content { max-width: 400px; }
+      .error-message-title { font-size: 1.5rem; font-weight: 600; color: var(--color-white); margin-bottom: 0.5rem; }
+      .error-message-text { font-size: 1rem; color: var(--color-text-primary); line-height: 1.5; margin: 0; }
+
+      /* Responsivo essencial */
+      @media (max-width: 1024px) {
+        .section-games-list { grid-template-columns: 1fr; }
+        .filter-section { position: relative; margin-bottom: 32px; padding: 20px; }
+        .filter-title { margin-bottom: 20px; }
+        .filter-options { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 12px; }
+        .filter-label { width: auto; min-width: 120px; padding: 10px 16px; font-size: 13px; }
+        /* Nav responsivo */
+        .nav-wrapper { justify-content: space-between; align-items: center; padding: 16px 0; position: relative; min-height: 64px; }
+        .nav-link-wrap { padding: 12px; }
+        .nav-link-wrap p { display: none; }
+        .nav-link-wrap svg { width: 24px; height: 24px; }
+        .nav-utility-link { width: 24px; height: 24px; }
+        .nav-utility-link svg { width: 24px; height: 24px; }
+        .nav-user-wrapper, .nav-user-profile-wrapper { display: none; }
+        .left-wrapper { display: flex; align-items: center; }
+        .left-wrapper ul { gap: 8px; }
+        .nav-brand { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+        .left-wrapper, .right-wrapper { z-index: 1; }
+        .nav-utility-wrapper { gap: 16px; }
+        /* Título menor em tablets */
+        .section-title-gradient { font-size: 2.75rem; margin-bottom: 48px; }
+        /* Espaço do conteúdo abaixo do nav em tablets */
+        #main-content { padding-top: 80px; }
+      }
+
+      @media screen and (max-width: 767px) {
+        /* Espaço do header da seção em mobile */
+        .section-header-jogos { padding-top: 2.25rem; margin-bottom: 1rem; }
+        .filter-section { padding: 16px; }
+        .filter-title { margin-bottom: 16px; font-size: 16px; }
+        .filter-options { gap: 8px; }
+        .filter-label { min-width: 100px; padding: 8px 12px; font-size: 12px; }
+        .section-title-gradient { font-size: 2.25rem; margin-bottom: 48px; padding-bottom: 1.25rem; }
+        .section-title-gradient::after { width: 120px; height: 3px; }
+        /* Padding extra no nav e logo central no mobile */
+        .nav-wrapper { padding: 18px 0; }
+        .nav-brand { left: 50%; top: 50%; transform: translate(-50%, -50%); }
+        /* Ícones do nav no mobile 28px */
+        .nav-link-wrap { padding: 12px; }
+        .nav-icon { width: 28px; height: 28px; }
+        .nav-link-wrap svg { width: 28px; height: 28px; }
+        .nav-utility-link { width: 28px; height: 28px; }
+        .nav-utility-link svg { width: 28px; height: 28px; }
+        /* Espaço do conteúdo abaixo do nav em mobile */
+        #main-content { padding-top: 80px; }
+        /* Logo do footer menor no mobile */
+        .footer-logo { height: 40px; }
+      }
+
+      @media screen and (max-width: 480px) {
+        .section-title-gradient { font-size: 1.75rem; margin-bottom: 32px; padding-bottom: 1rem; }
+        .section-title-gradient::after { width: 100px; height: 3px; }
+      }
+    </style>
+
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+  </head>
+  <body>
+    <div class="page-wrapper" role="document">
+      <a href="#main-content" class="skip-link visually-hidden-focusable">Pular para o conteúdo principal</a>
+      <nav class="nav-bar" role="navigation" aria-label="Navegação principal">
+        <div class="padding-global">
+          <div class="container">
+            <div class="nav-wrapper d-flex justify-content-between align-items-center">
+              <div class="left-wrapper">
+                <ul role="menubar">
+                  <li role="none">
+                    <a href="index.html" class="active" aria-current="page" role="menuitem" aria-label="Página inicial">
+                      <div class="nav-link-wrap">
+                        <div class="nav-icon" aria-hidden="true">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="currentColor" viewBox="0 0 256 256">
+                            <path d="M222.14,105.85l-80-80a20,20,0,0,0-28.28,0l-80,80A19.86,19.86,0,0,0,28,120v96a12,12,0,0,0,12,12h64a12,12,0,0,0,12-12V164h24v52a12,12,0,0,0,12,12h64a12,12,0,0,0,12-12V120A19.86,19.86,0,0,0,222.14,105.85ZM204,204H164V152a12,12,0,0,0-12-12H104a12,12,0,0,0-12,12v52H52V121.65l76-76,76,76Z"></path>
+                          </svg>
+                        </div>
+                        <p>Home</p>
+                      </div>
+                    </a>
+                  </li>
+                  <li role="none">
+                    <a href="jogos.html" role="menuitem" aria-label="Loja de jogos">
+                      <div class="nav-link-wrap">
+                        <div class="nav-icon" aria-hidden="true">
+                          <svg width="100%" height="100%" viewBox="0 0 20 21" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.7499 9.25H11.8749C11.7092 9.25 11.5502 9.18415 11.433 9.06694C11.3158 8.94973 11.2499 8.79076 11.2499 8.625C11.2499 8.45924 11.3158 8.30027 11.433 8.18306C11.5502 8.06585 11.7092 8 11.8749 8H13.7499C13.9157 8 14.0747 8.06585 14.1919 8.18306C14.3091 8.30027 14.3749 8.45924 14.3749 8.625C14.3749 8.79076 14.3091 8.94973 14.1919 9.06694C14.0747 9.18415 13.9157 9.25 13.7499 9.25ZM8.12494 8H7.49994V7.375C7.49994 7.20924 7.43409 7.05027 7.31688 6.93306C7.19967 6.81585 7.0407 6.75 6.87494 6.75C6.70918 6.75 6.55021 6.81585 6.43299 6.93306C6.31578 7.05027 6.24994 7.20924 6.24994 7.375V8H5.62494C5.45918 8 5.30021 8.06585 5.18299 8.18306C5.06578 8.30027 4.99994 8.45924 4.99994 8.625C4.99994 8.79076 5.06578 8.94973 5.18299 9.06694C5.30021 9.18415 5.45918 9.25 5.62494 9.25H6.24994V9.875C6.24994 10.0408 6.31578 10.1997 6.43299 10.3169C6.55021 10.4342 6.70918 10.5 6.87494 10.5C7.0407 10.5 7.19967 10.4342 7.31688 10.3169C7.43409 10.1997 7.49994 10.0408 7.49994 9.875V9.25H8.12494C8.2907 9.25 8.44967 9.18415 8.56688 9.06694C8.68409 8.94973 8.74994 8.79076 8.74994 8.625C8.74994 8.45924 8.68409 8.30027 8.56688 8.18306C8.44967 8.06585 8.2907 8 8.12494 8ZM18.8656 16.1758C18.63 16.5121 18.3237 16.7929 17.968 16.9982C17.6124 17.2035 17.2161 17.3285 16.8071 17.3643C16.398 17.4001 15.986 17.3459 15.6001 17.2055C15.2143 17.0651 14.8638 16.8419 14.5734 16.5516C14.564 16.5422 14.5546 16.5328 14.546 16.5227L11.4437 13H8.55306L5.45384 16.5227L5.4265 16.5516C4.89853 17.0784 4.18329 17.3745 3.43744 17.375C3.02684 17.3748 2.62126 17.2848 2.24918 17.1112C1.8771 16.9375 1.54755 16.6846 1.28368 16.37C1.0198 16.0554 0.828008 15.6869 0.721763 15.2903C0.615519 14.8936 0.597403 14.4786 0.668687 14.0742C0.66831 14.0706 0.66831 14.0669 0.668687 14.0633L1.94759 7.49375C2.13793 6.41021 2.70404 5.42841 3.54646 4.72087C4.38888 4.01333 5.45371 3.62531 6.55384 3.625H13.4374C14.5342 3.62675 15.5958 4.01255 16.4378 4.71541C17.2798 5.41827 17.8491 6.39381 18.0468 7.47266C18.0468 7.47734 18.0468 7.48203 18.0468 7.48672L19.3257 14.0625C19.3261 14.0661 19.3261 14.0698 19.3257 14.0734C19.3919 14.4369 19.3853 14.8098 19.3063 15.1707C19.2273 15.5316 19.0775 15.8732 18.8656 16.1758ZM13.4374 11.75C14.3491 11.75 15.2235 11.3878 15.8681 10.7432C16.5128 10.0985 16.8749 9.22418 16.8749 8.3125C16.8749 7.40082 16.5128 6.52648 15.8681 5.88182C15.2235 5.23716 14.3491 4.875 13.4374 4.875H6.55384C5.74677 4.87572 4.96581 5.16104 4.34835 5.68076C3.73089 6.20048 3.31649 6.9213 3.17806 7.71641V7.72656L1.89837 14.2961C1.84181 14.6218 1.89 14.957 2.03601 15.2536C2.18203 15.5502 2.41834 15.7928 2.71096 15.9466C3.00359 16.1004 3.33745 16.1574 3.66452 16.1094C3.99159 16.0615 4.29503 15.911 4.53119 15.6797L7.80619 11.9617C7.86483 11.8952 7.93695 11.8419 8.01777 11.8054C8.09859 11.7689 8.18626 11.75 8.27494 11.75H13.4374ZM18.1015 14.2961L17.4187 10.7805C16.9987 11.4586 16.4127 12.0183 15.716 12.4067C15.0193 12.7951 14.2351 12.9993 13.4374 13H13.1093L15.4687 15.6805C15.6466 15.8535 15.863 15.9819 16.1001 16.0551C16.3372 16.1283 16.5883 16.1442 16.8328 16.1016C17.24 16.0297 17.6022 15.7993 17.8398 15.4608C18.0775 15.1224 18.1713 14.7036 18.1007 14.2961H18.1015Z"></path>
+                          </svg>
+                        </div>
+                        <p>Game Store</p>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="nav-brand">
+                <a href="/" aria-label="Página inicial da Iara Games">
+                  <img src="assets/brand/iara_games-icon.svg" alt="Ícone da Iara Games" class="nav-brand-icon" />
+                </a>
+              </div>
+              <div class="right-wrapper d-flex align-items-center">
+                <div class="nav-utility-wrapper d-flex" role="toolbar" aria-label="Ferramentas de usuário">
+                  <a href="#" class="nav-utility-link me-3" role="button" aria-label="Notificações">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="currentColor" viewBox="0 0 256 256" aria-hidden="true">
+                      <path d="M225.29,165.93C216.61,151,212,129.57,212,104a84,84,0,0,0-168,0c0,25.58-4.59,47-13.27,61.93A20.08,20.08,0,0,0,30.66,186,19.77,19.77,0,0,0,48,196H84.18a44,44,0,0,0,87.64,0H208a19.77,19.77,0,0,0,17.31-10A20.08,20.08,0,0,0,225.29,165.93ZM128,212a20,20,0,0,1-19.6-16h39.2A20,20,0,0,1,128,212ZM54.66,172C63.51,154,68,131.14,68,104a60,60,0,0,1,120,0c0,27.13,4.48,50,13.33,68Z"></path>
+                    </svg>
+                  </a>
+                  <a href="#" class="nav-utility-link" role="button" aria-label="Carrinho de compras" style="position: relative;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="currentColor" viewBox="0 0 256 256" aria-hidden="true">
+                      <path d="M241.55,64.74A12,12,0,0,0,232,60H60.23L51.56,28.79A12,12,0,0,0,40,20H20a12,12,0,0,0,0,24H30.88l34.3,123.49a28.09,28.09,0,0,0,27,20.51H191a28.09,28.09,0,0,0,27-20.51l25.63-92.28A12,12,0,0,0,241.55,64.74ZM194.8,161.07A4,4,0,0,1,191,164H92.16a4,4,0,0,1-3.85-2.93L66.9,84H216.21ZM108,220a20,20,0,1,1-20-20A20,20,0,0,1,108,220Zm104,0a20,20,0,1,1-20-20A20,20,0,0,1,212,220Z"></path>
+                    </svg>
+                    <span id="nav-cart-counter" class="cart-counter"></span>
+                  </a>
+                </div>
+                <div class="nav-user-wrapper ms-3" role="complementary" aria-label="Informações do usuário">
+                  <div class="nav-user-balance">
+                    <img class="nav-user-balance-icon" src="assets/coin-badge.svg" alt="Moeda da Iara Games" aria-hidden="true" />
+                    <p class="balance-text" aria-label="Saldo atual: 5000 IC">5000 IC</p>
+                    <img class="balance-curved-line-gradient" src="assets/curved-line-gradient.svg" alt="" aria-hidden="true" />
+                  </div>
+                </div>
+                <div class="nav-user-profile-wrapper ms-3">
+                  <img class="nav-user-profile-icon" src="assets/foto-perfil.webp" alt="Foto de perfil do usuário" role="img" aria-label="Foto de perfil" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <main id="main-content" role="main">
+        <section class="padding-global" aria-labelledby="jogos-title">
+          <div class="container">
+            <div class="section-header-jogos">
+              <h1 id="jogos-title" class="section-title-gradient">Lista de jogos</h1>
+            </div>
+
+            <div class="mb-5">
+              <label for="busca-nome" class="visually-hidden">Buscar pelo nome</label>
+              <input id="busca-nome" type="search" placeholder="Buscar jogo pelo nome..." aria-label="Buscar jogo pelo nome" />
+            </div>
+
+            <div class="section-games-list">
+              <div class="filter-section" role="complementary" aria-label="Filtros de jogos">
+                <h2 class="filter-title" id="filter-title">Filtrar por categoria</h2>
+                <div class="filter-options" role="radiogroup" aria-labelledby="filter-title" id="filtros-categorias">
+                  <input type="radio" name="filtro" id="todos" class="filter-option" checked aria-label="Mostrar todos os jogos" />
+                  <label for="todos" class="filter-label">Todos</label>
+                </div>
+              </div>
+
+              <div class="games-content-column">
+                <div class="games-list-grid row gx-2 g-4" role="list" aria-label="Lista de jogos disponíveis" id="lista-jogos"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer" role="contentinfo">
+        <div class="padding-global">
+          <div class="container">
+            <div class="footer-content">
+              <div class="footer-main-content position-relative">
+                <div class="footer-corner-left position-absolute" aria-hidden="true"></div>
+                <div class="footer-corner-right position-absolute" aria-hidden="true"></div>
+                <div class="footer-corner-bottom-left position-absolute" aria-hidden="true"></div>
+                <div class="footer-corner-bottom-right position-absolute" aria-hidden="true"></div>
+                <div class="footer-brand text-center mb-4">
+                  <img src="assets/brand/iara_games-logo-horizontal-black.svg" alt="Logotipo da Iara Games" class="footer-logo" />
+                </div>
+                <nav class="footer-links text-center mb-3" role="navigation" aria-label="Links do rodapé">
+                  <a href="index.html" class="footer-link">Game Store</a>
+                </nav>
+                <p class="footer-tagline text-center small mb-0">Feito com ❤️ para a cultura brasileira</p>
+              </div>
+              <div class="footer-divider my-4" aria-hidden="true"></div>
+              <div class="footer-bottom text-center">
+                <p class="text-size-sm mb-2 text-muted small">©2025 IARA GAMES™ // Todos direitos reservados</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Bootstrap JS via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <!-- ====== JS (ES5) para buscar APIs e renderizar ====== -->
+    <script>
+      // ------- Utils -------
+      function norm(s){
+        s = (s || "").toString();
+        try { s = s.normalize("NFD"); } catch(e) {}
+        return s.replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
+      }
+      function alerta(msg){
+        if (!msg) { return; }
+        renderErrorMessage(msg, "ph-warning-circle");
+      }
+      function anunciar(texto){
+        var status = document.getElementById("filter-status");
+        if(!status){
+          status = document.createElement("div");
+          status.id = "filter-status";
+          status.className = "visually-hidden";
+          status.setAttribute("role","status");
+          status.setAttribute("aria-live","polite");
+          var host = document.querySelector(".filter-section") || document.body;
+          host.appendChild(status);
+        }
+        status.textContent = texto;
+      }
+
+      // ------- Render -------
+      function renderCard(jogo){
+        var col = document.createElement("div");
+        col.className = "col-sm-6 col-md-4 col-lg-4";
+        col.setAttribute("role","listitem");
+
+        var card = document.createElement("div");
+        card.className = "game-card h-100";
+        card.setAttribute("role","article");
+        card.setAttribute("data-categoria", (jogo.categoria || []).join(" "));
+
+        var img = document.createElement("img");
+        img.className = "game-image";
+        img.src = jogo.imagem;
+        img.alt = "Capa do jogo " + (jogo.nome || "");
+
+        var content = document.createElement("div");
+        content.className = "game-content";
+
+        var h3 = document.createElement("h3");
+        h3.className = "game-title";
+        h3.textContent = jogo.nome || "";
+
+        var dev = document.createElement("p");
+        dev.className = "game-developer";
+        dev.textContent = jogo.dev || "";
+
+        var tags = document.createElement("div");
+        tags.className = "game-tags";
+        tags.setAttribute("role", "list");
+        tags.setAttribute("aria-label", "Categorias do jogo");
+        var i, tag;
+        var cats = jogo.categoria || [];
+        for(i=0;i<cats.length;i++){
+          tag = document.createElement("span");
+          tag.className = "game-tag";
+          tag.setAttribute("role", "listitem");
+          tag.textContent = cats[i];
+          tags.appendChild(tag);
+        }
+
+        var pa = document.createElement("div");
+        pa.className = "game-price-action";
+
+        var precoEl = document.createElement("p");
+        precoEl.className = "game-price";
+        var v = (typeof jogo.preco === "number") ? jogo.preco : Number(jogo.preco);
+        var pf = isNaN(v) ? "" : ("R$ " + v.toFixed(2).replace(".", ","));
+        precoEl.textContent = pf;
+        precoEl.setAttribute("aria-label", "Preço: " + pf);
+
+        var link = document.createElement("a");
+        link.href = "#";
+        link.className = "buy-button";
+        link.setAttribute("role","button");
+        link.setAttribute("aria-label", "Comprar jogo " + (jogo.nome || ""));
+        link.textContent = "Comprar jogo";
+
+        pa.appendChild(precoEl);
+        pa.appendChild(link);
+
+        content.appendChild(h3);
+        if (jogo.dev) content.appendChild(dev);
+        if (cats.length > 0) content.appendChild(tags);
+        content.appendChild(pa);
+
+        card.appendChild(img);
+        card.appendChild(content);
+        col.appendChild(card);
+        return col;
+      }
+
+      function renderNoResults(){
+        var grid = document.getElementById("lista-jogos");
+        if (!grid) return;
+        grid.innerHTML = "";
+        alerta("Nenhum jogo encontrado. Tente ajustar os filtros ou a busca.");
+      }
+
+      function renderErrorMessage(message, iconClass){
+        var grid = document.getElementById("lista-jogos");
+        grid.innerHTML = "";
+
+        var col = document.createElement("div");
+        col.className = "col-12";
+        col.setAttribute("role","listitem");
+
+        var card = document.createElement("div");
+        card.className = "error-message-card";
+        card.setAttribute("role","alert");
+
+        var iconContainer = document.createElement("div");
+        iconContainer.className = "error-message-icon";
+
+        var icon = document.createElement("i");
+        icon.setAttribute("class", iconClass || "ph-warning");
+        icon.setAttribute("aria-hidden", "true");
+
+        var content = document.createElement("div");
+        content.className = "error-message-content";
+
+        var title = document.createElement("h3");
+        title.className = "error-message-title";
+        title.textContent = "Ops! Algo deu errado";
+
+        var text = document.createElement("p");
+        text.className = "error-message-text";
+        text.textContent = message || "Ocorreu um erro inesperado. Tente novamente mais tarde.";
+
+        iconContainer.appendChild(icon);
+        content.appendChild(title);
+        content.appendChild(text);
+
+        card.appendChild(iconContainer);
+        card.appendChild(content);
+        col.appendChild(card);
+
+        grid.appendChild(col);
+      }
+
+      function renderLista(jogos){
+        var grid = document.getElementById("lista-jogos");
+        if (jogos.length === 0) {
+          renderNoResults();
+          anunciar("Nenhum jogo encontrado");
+        } else {
+          grid.innerHTML = "";
+          var frag = document.createDocumentFragment();
+          for (var i=0;i<jogos.length;i++){ frag.appendChild(renderCard(jogos[i])); }
+          grid.appendChild(frag);
+          anunciar(jogos.length + " jogos exibidos");
+        }
+      }
+
+      function renderCategorias(categorias){
+        var cont = document.getElementById("filtros-categorias");
+        var filhos = Array.prototype.slice.call(cont.children);
+        for (var i=0;i<filhos.length;i++){
+          var el = filhos[i];
+          var keep = (el.id === "todos") || (el.tagName === "LABEL" && el.getAttribute("for") === "todos");
+          if (!keep) { cont.removeChild(el); i--; }
+        }
+        for (var j=0;j<categorias.length;j++){
+          var labelTxt = categorias[j].label || categorias[j].id || "";
+          var id = norm(labelTxt);
+
+          var input = document.createElement("input");
+          input.type = "radio";
+          input.name = "filtro";
+          input.id = id;
+          input.className = "filter-option";
+          input.setAttribute("aria-label", "Filtrar jogos de " + labelTxt);
+
+          var lab = document.createElement("label");
+          lab.className = "filter-label";
+          lab.setAttribute("for", id);
+          lab.textContent = labelTxt;
+
+          cont.appendChild(input);
+          cont.appendChild(lab);
+        }
+      }
+
+      // ------- APIs -------
+      function apiTodos(){
+        return fetch("/api/jogos", { cache: "no-store" })
+          .then(function(r){ if(!r.ok) throw new Error("Falha /api/jogos:"+r.status); return r.json(); });
+      }
+      function apiCategorias(){
+        return fetch("/api/jogos/lista-categorias", { cache: "no-store" })
+          .then(function(r){ if(!r.ok) throw new Error("Falha /api/jogos/lista-categorias:"+r.status); return r.json(); })
+          .then(function(data){ return (data && data.categorias) ? data.categorias : []; });
+      }
+      function apiPorNome(nome){
+        return fetch("/api/jogos/nome?nome="+encodeURIComponent(nome), { cache: "no-store" })
+          .then(function(r){ if(!r.ok) throw new Error("Falha /api/jogos/nome:"+r.status); return r.json(); })
+          .then(function(d){ return d && d.resultados ? d.resultados : []; });
+      }
+      function apiPorCategoria(cat){
+        return fetch("/api/jogos/categoria?cat="+encodeURIComponent(cat), { cache: "no-store" })
+          .then(function(r){ if(!r.ok) throw new Error("Falha /api/jogos/categoria:"+r.status); return r.json(); })
+          .then(function(d){ return d && d.resultados ? d.resultados : []; });
+      }
+
+      // ------- Estado & filtros -------
+      var cacheTodos = [];
+      var filtroCategoria = null;
+      var termoNome = "";
+
+      function atualizar(){
+        var p;
+        if (!filtroCategoria && !termoNome) {
+          renderLista(cacheTodos);
+          return;
+        } else if (filtroCategoria && !termoNome) {
+          p = apiPorCategoria(filtroCategoria);
+        } else if (!filtroCategoria && termoNome) {
+          p = apiPorNome(termoNome);
+        } else {
+          p = apiPorCategoria(filtroCategoria).then(function(lista){
+            var r = [];
+            for (var i=0;i<lista.length;i++){
+              if (norm(lista[i].nome).indexOf(norm(termoNome)) > -1) r.push(lista[i]);
+            }
+            return r;
+          });
+        }
+        p.then(function(base){ renderLista(base); })
+         .catch(function(e){ console.error(e); alerta("Erro ao atualizar a lista."); });
+      }
+
+      function ligarEventos(){
+        var filtros = document.getElementById("filtros-categorias");
+        filtros.addEventListener("change", function(e){
+          var t = e.target || e.srcElement;
+          var isRadio = t && t.tagName === "INPUT" && (" " + t.className + " ").indexOf(" filter-option ") >= 0;
+          if (isRadio){
+            filtroCategoria = (t.id === "todos") ? null : t.id;
+            atualizar();
+          }
+        });
+
+        var busca = document.getElementById("busca-nome");
+        var debounce;
+        busca.addEventListener("input", function(){
+          clearTimeout(debounce);
+          debounce = setTimeout(function(){
+            termoNome = busca.value || "";
+            atualizar();
+          }, 200);
+        });
+      }
+
+      // ------- Init -------
+      document.addEventListener("DOMContentLoaded", function(){
+        alerta("Carregando dados...");
+        Promise.all([apiCategorias(), apiTodos()])
+          .then(function(arr){
+            var cats = arr[0], todos = arr[1];
+            cacheTodos = Array.isArray(todos) ? todos : [];
+            renderCategorias(cats || []);
+            var todosRadio = document.getElementById("todos");
+            if (todosRadio) todosRadio.checked = true;
+            renderLista(cacheTodos);
+            ligarEventos();
+            alerta("");
+          })
+          .catch(function(e){
+            console.error(e);
+            alerta("Não foi possível carregar. Verifique o Inject 'Carregar Jogos' e as rotas /api.");
+          });
+      });
+    </script>
+  </body>
+</html>
+
+

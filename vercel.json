@@ -1,39 +1,10 @@
 {
-  "version": 2,
-  "buildCommand": "cd app && npm ci --legacy-peer-deps && npm run build",
+  "buildCommand": "cd app && npm install --legacy-peer-deps && npm run build",
   "outputDirectory": "app/build",
-  "installCommand": "npm install --prefix ./app --legacy-peer-deps",
-  "framework": null,
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
-    },
-    {
       "source": "/(.*)",
-      "destination": "/app/build/$1"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/static/(.*)",
-      "dest": "/app/build/static/$1"
-    },
-    {
-      "src": "/favicon.ico",
-      "dest": "/app/build/favicon.ico"
-    },
-    {
-      "src": "/manifest.json",
-      "dest": "/app/build/manifest.json"
-    },
-    {
-      "src": "/logo(.*).png",
-      "dest": "/app/build/logo$1.png"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/app/build/index.html"
+      "destination": "/index.html"
     }
   ]
 }

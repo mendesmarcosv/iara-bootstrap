@@ -259,7 +259,7 @@ Este projeto é apenas para fins educacionais.
 
 | Profile | Nome | Redes Sociais |
 | :---: | :---: | :---: |
-| [<img src="https://github.com/DevSaLLein.png" height="90px">](https://github.com/DevSaLLein) | Isaac Andrade | [GitHub](https://github.com/DevSaLLein) \| [LinkedIn](https://www.linkedin.com/in/devsallein) \| [Instagram](https://www.instagram.com/http.zaclimaaxs/) |
+| [<img src="https://github.com/heyIsaac.png" height="90px">](https://github.com/heyIsaac) | Isaac Andrade | [GitHub](https://github.com/heyIsaac) \| [LinkedIn](https://www.linkedin.com/in/devsallein) \| [Instagram](https://www.instagram.com/http.zaclimaaxs/) |
 | [<img src="https://github.com/matheusnfran.png" height="90px">](https://github.com/matheusnfran) | Matheus Francisco | [GitHub](https://github.com/matheusnfran) |
 | [<img src="https://github.com/mendesmarcosv.png" height="90px">](https://github.com/mendesmarcosv) | Marco Mendes | [GitHub](https://github.com/mendesmarcosv) |
 | [<img src="https://github.com/HenriquePinheiro8922.png" height="90px">](https://github.com/HenriquePinheiro8922) | Henrique Pinheiro | [GitHub](https://github.com/HenriquePinheiro8922) |
